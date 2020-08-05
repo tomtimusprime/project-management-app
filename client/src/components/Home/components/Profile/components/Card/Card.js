@@ -15,8 +15,3 @@ class Card extends Component {
 }
 
 export default Card;
-
-
-// <h1 className="data">Name: {this.props.name}</h1>
-// <img src={imgSrc} alt={this.props.name}/>
-// let imgSrc = `${betterURL(this.props.id)}`;
