@@ -3,11 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import history from "./utils/history";
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
-import Home from "./components/Home/Home";
+import Profile from "./components/Home/components/Profile/Profile"
 import Loading from "./components/Loading/Loading";
-import Profile from "./components/Profile/Profile"
-
+import Layout from "./components/Layout/Layout";
 function App() {
   const { isLoading } = useAuth0();
 
@@ -16,13 +14,13 @@ function App() {
   }
 
   return (
-    <Router history={history}>
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/profile" component={Profile} />
-      </Switch>
-    </Router>
+    <Layout>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={Profile} />
+        </Switch>
+      </Router>
+    </Layout>
   );
 }
 

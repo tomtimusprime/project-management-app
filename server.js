@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -12,6 +14,25 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
+
+var jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://dev-znif8qv4.us.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'aplus.project.com',
+  issuer: 'https://dev-znif8qv4.us.auth0.com/',
+  algorithms: ['RS256']
+});
+
+app.use(jwtCheck);
+
+app.get('/authorized', function (req, res) {
+  res.send('Secured Resource');
+});
+
 
 // Send every other request to the React app
 // Define any API routes before this runs
