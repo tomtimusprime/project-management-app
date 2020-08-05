@@ -5,6 +5,9 @@ const routes = require("./routes");
 const app = express();
 // const db = require("./mysql-models");
 const PORT = process.env.PORT || 3001;
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
+
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,8 +24,33 @@ console.log(process.env.MONGO_URL)
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});
 
+
 // Start the API server and Connect to the mySQL DB
 const syncOptions = { force: false };
+var jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://dev-znif8qv4.us.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'aplus.project.com',
+  issuer: 'https://dev-znif8qv4.us.auth0.com/',
+  algorithms: ['RS256']
+});
+
+app.use(jwtCheck);
+
+app.get('/authorized', function (req, res) {
+  res.send('Secured Resource');
+});
+
+
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
   const startServer = async () => {
     // await db.sequelize.sync(syncOptions);
