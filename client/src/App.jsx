@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import Loading from "./components/Loading/Loading";
+import Profile from "./components/Profile/Profile"
 
 function App() {
   const { isLoading } = useAuth0();
@@ -19,9 +20,12 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </Router>
   );
 }
 
 export default App;
+
+// <Route path="/profile" component={Profile} />
