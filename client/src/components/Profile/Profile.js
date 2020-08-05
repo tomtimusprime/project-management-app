@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Jumbotron, Grid, Image, Table, Container, Row, Col, Button } from "react-bootstrap";
 import Sidebar from "../Sidebar/Sidebar";
 import Card from "../Card/Card";
+import "./Profile.css"
 
 const Profile = ({ user }) => {
+    let imgSrc = "../assets/profilepic-cropped.jpg"
+    
     return (
         <>
             {console.log(user)}
@@ -16,36 +19,37 @@ const Profile = ({ user }) => {
                 <p>
                     Below is your dashboard.
                 </p>
+                <img  src={imgSrc} className="img"/>
             </Jumbotron>
             <container fluid>
-            
-            <Row>
-                <Col>
-                    <Card />
-                </Col>
-                <Col>
-                    <Card />
-                </Col>
-                <Col>
-                    <Card />
-                </Col>
 
-            </Row>
-            <br></br>
-            <Row>
-            <Col>
-                <Card />
-            </Col>
-            <Col>
-                <Card />
-            </Col>
-            <Col>
-                <Card />
-            </Col>
+                <Row>
+                    <Col>
+                        <Card />
+                    </Col>
+                    <Col>
+                        <Card />
+                    </Col>
+                    <Col>
+                        <Card />
+                    </Col>
 
-        </Row>
-        </container>
-            
+                </Row>
+                <br></br>
+                <Row>
+                    <Col>
+                        <Card />
+                    </Col>
+                    <Col>
+                        <Card />
+                    </Col>
+                    <Col>
+                        <Card />
+                    </Col>
+
+                </Row>
+            </container>
+
         </>
     );
 };
