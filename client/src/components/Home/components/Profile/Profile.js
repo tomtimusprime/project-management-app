@@ -1,46 +1,80 @@
-import React from "react";
-import { Jumbotron, Table, Container, Row, Col } from "react-bootstrap";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Jumbotron, Row, Col } from "react-bootstrap";
+import Card from "../../../Card/Card";
+import styled from "styled-components";
+
+const ProfileImg = styled.img`
+  height: 150px;
+  width: 250px;
+`;
 
 const Profile = ({ user }) => {
-    return (
-        <>
-            {console.log(user)}
-            <Jumbotron>
-                <h1>Hello, {user.nickname}!</h1>
-                <p>
-                    You have entered the realm.
-                </p>
-                <p>
-                    Below table shows the user profile details that are
-                    returned from Auth0.
-                </p>
-            </Jumbotron>
-            <Container>
-                <Row>
-                    <Col>
-                        <Table striped bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th>Name</th>
-                                    <th>Nickname</th>
-                                    <th>Picture</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{user.email}</td>
-                                    <td>{user.name}</td>
-                                    <td>{user.nickname}</td>
-                                    <td><img src={user.picture} alt="avatar" /></td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    );
+  let imgSrc = "../assets/profilepic-cropped.jpg";
+
+  return (
+    <>
+      {console.log(user)}
+      <Jumbotron>
+        <h1>Welcome back!</h1>
+        <p>You are at your profile page.</p>
+        <p>Below is your dashboard.</p>
+        <ProfileImg src={imgSrc} className="img" />
+      </Jumbotron>
+      <container fluid>
+        <Row>
+          <Col>
+            <Card />
+          </Col>
+          <Col>
+            <Card />
+          </Col>
+          <Col>
+            <Card />
+          </Col>
+        </Row>
+        <br></br>
+        <Row>
+          <Col>
+            <Card />
+          </Col>
+          <Col>
+            <Card />
+          </Col>
+          <Col>
+            <Card />
+          </Col>
+        </Row>
+      </container>
+    </>
+  );
 };
 
 export default Profile;
+
+// <td>{user.email}</td>
+// <td>{user.name}</td>
+// <td>{user.nickname}</td>
+// <td><img src={user.picture} alt="avatar" /></td>
+
+// <Container>
+//             <Row>
+//                 <Col>
+//                     <Table striped bordered hover size="sm">
+//                         <thead>
+//                             <tr>
+//                                 <th>Email</th>
+//                                 <th>Name</th>
+//                                 <th>Nickname</th>
+//                                 <th>Picture</th>
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             <tr>
+
+//                             </tr>
+//                         </tbody>
+//                     </Table>
+//                 </Col>
+//             </Row>
+//         </Container>

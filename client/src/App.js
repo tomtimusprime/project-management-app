@@ -4,6 +4,7 @@ import history from "./utils/history";
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
+import Profile from "./components/Home/components/Profile/Profile"
 import Loading from "./components/Loading/Loading";
 import Layout from "./components/Layout/Layout";
 function App() {
@@ -17,7 +18,7 @@ function App() {
     <Layout>
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Profile} />
         </Switch>
       </Router>
     </Layout>
@@ -25,3 +26,5 @@ function App() {
 }
 
 export default App;
+
+// <Route path="/profile" component={Profile} />
