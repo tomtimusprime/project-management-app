@@ -8,7 +8,7 @@ const MainDiv = styled.div`
 `;
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div >
       <Navbar />
       <MainDiv>
         <Sidebar />
