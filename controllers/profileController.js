@@ -1,4 +1,6 @@
 const db = require("../models");
+require("../config/passport")(passport);
+
 
 // Defining methods for the ProfilesController
 module.exports = {
