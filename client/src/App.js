@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import history from "./utils/history";
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Profile from "./components/Home/components/Profile/Profile"
+import Profile from "./components/Profile/Profile";
 import Loading from "./components/Loading/Loading";
 import Layout from "./components/Layout/Layout";
 function App() {
