@@ -6,6 +6,7 @@ import WorkCard from "./components/Card/WorkCard";
 import HistoryCard from "./components/Card/HistoryCard";
 import styled from "styled-components";
 import GuestImg from '../../../../assets/images/guest-avatar.jpg'
+// import Modal from "../Modal/Modal.js";
 const ProfileImg = styled.img`
   height: 100px;
   width: 125px;
