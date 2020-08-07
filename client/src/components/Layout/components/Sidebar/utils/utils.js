@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from 'framer-motion';
-
+import {Link} from 'react-router-dom'
 export const Avatar = styled.img`
     border-radius: 50%;
     width: 7rem;
@@ -20,8 +20,9 @@ export const SideMenu = styled(motion.div)`
     height:calc(100vh - 56px);
     display: inline-flex;
     flex-direction: column;
-    background-color: #323232;
+    background-color: var(--dark-grey-main);
     position: relative;
+    border-right: 10px solid var(--light-grey-sec)
   `;
 
 export const sideBarVariants = {
@@ -45,11 +46,21 @@ export const sideBarVariants = {
 export const childDivVariants = {
   closed: {
     opacity: 0,
+    padding: '0',
     x: -100, 
   },
   open: {
     opacity: 1,
+    padding: '2rem',
     x: 0,
     transition: { duration: .3, delay: .3 }
   }
 }
+
+export const CustLink = styled(Link)`
+  color: var(--light-grey-main);
+
+  &:hover {
+    color var(--light-grey-secc)
+  }
+`

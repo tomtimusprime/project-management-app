@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import LoginButton from "./components/LoginButton/LoginButton";
-import LogoutButton from "./components/LogoutButton/LogoutButton";
+import LoginButton from "../Sidebar/components/LoginButton/LoginButton";
+import LogoutButton from "../Sidebar/components/LogoutButton/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
