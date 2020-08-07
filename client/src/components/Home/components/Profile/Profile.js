@@ -1,12 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Jumbotron, Row, Col, Container } from "react-bootstrap";
-import Card from "./components/Card/Card";
+import ProfileCard from "./components/Card/ProfileCard";
+import WorkCard from "./components/Card/WorkCard";
+import HistoryCard from "./components/Card/HistoryCard";
 import styled from "styled-components";
 import GuestImg from '../../../../assets/images/guest-avatar.jpg'
 const ProfileImg = styled.img`
-  height: 150px;
-  width: 250px;
+  height: 100px;
+  width: 125px;
+`;
+
+const CustomJumbotron = styled.div`
+  background-color: #3A3A3A;
+  border-top-left-radius: 0;
+  padding: 4rem 2rem;
+  
+  .header {
+    color: white;
+  }
+
 `;
 
 const Profile = ({ user }) => {
@@ -14,39 +27,44 @@ const Profile = ({ user }) => {
   return (
     <>
       {console.log(user)}
-      <Jumbotron>
-        <h1>Welcome back!</h1>
-        <p>You are at your profile page.</p>
-        <p>Below is your dashboard.</p>
-        <ProfileImg src={GuestImg} />
-      </Jumbotron>
-      <Container fluid>
+      <CustomJumbotron>
         <Row>
           <Col>
-            <Card />
+            <h1 className="header">Welcome back!</h1>
+            <h1 className="header">User Name</h1>
           </Col>
           <Col>
-            <Card />
+            <ProfileCard name={"Tom"} title={"Software Engineer"} about={"Based in AZ"}/>
+          </Col>
+        </Row>
+      </CustomJumbotron>
+      <Container>
+        <Row className="py-5">
+          <Col>
+            <WorkCard />
           </Col>
           <Col>
-            <Card />
+            <HistoryCard />
           </Col>
         </Row>
         <br></br>
-        <Row>
-          <Col>
-            <Card />
-          </Col>
-          <Col>
-            <Card />
-          </Col>
-          <Col>
-            <Card />
-          </Col>
-        </Row>
       </Container>
     </>
   );
 };
 
 export default Profile;
+
+// <Row>
+//           <Col>
+//             <Card />
+//           </Col>
+//           <Col>
+//             <Card />
+//           </Col>
+//           <Col>
+//             <Card />
+//           </Col>
+//         </Row>
+
+// <Jumbotron style={{backgroundColor: "#3A3A3A", borderTopLeftRadius: 0}}></Jumbotron>
