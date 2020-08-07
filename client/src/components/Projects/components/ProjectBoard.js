@@ -1,38 +1,33 @@
-import React from 'react'
-import { Card } from 'react-bootstrap';
-import styled from 'styled-components';
-
-const CustCard = styled.div`
-    width:100%;
-    border: 2px solid var(--light-grey-sec);
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .25);
-    height: 500px;
-    overflowY: auto;
-    display: flex;
-    flex-direction: column;
-`
+import React from "react";
+import { Card, Row, Col } from "react-bootstrap";
+import styled from "styled-components";
+import ProjectCard from "./ProjectCard/ProjectCard";
+const CustCard = styled(Card)`
+height: 35rem`;
 
 const CardHeader = styled.div`
-    border-bottom: 1px solid var(--light-grey-sec);
-    background-color: var(--light-grey-sec);
-    padding: 1rem;
-`
+  border-bottom: 1px solid var(--light-grey-sec);
+`;
 
-const CardBody = styled.div`
-padding: 2rem;
-`
+const CardBody = styled.div``;
 const ProjectBoard = () => {
-    return (
-        <CustCard>
-            <CardHeader>
-                <h1 className='text-center'>hi</h1>
+  return (
+    <CustCard>
+      <Card.Body className='w-100'>
+        <Row>
+          <Col>
+            <CardHeader className="p-sm-2">
+              <h1 className="text-center">hi</h1>
             </CardHeader>
-            <CardBody>
-
-            </CardBody>
-        </CustCard>
-
-    )
-}
-export default ProjectBoard
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+              <ProjectCard />
+          </Col>
+        </Row>
+      </Card.Body>
+    </CustCard>
+  );
+};
+export default ProjectBoard;

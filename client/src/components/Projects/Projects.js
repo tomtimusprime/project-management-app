@@ -11,13 +11,13 @@ const Projects = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col lg={4}>
                         <ProjectBoard />
                     </Col>
-                    <Col>
+                    <Col lg={4}>
                         <ProjectBoard />
                     </Col>
-                    <Col>
+                    <Col lg={4}>
                         <ProjectBoard />
                     </Col>
                 </Row>

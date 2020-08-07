@@ -22,7 +22,8 @@ export const SideMenu = styled(motion.div)`
     flex-direction: column;
     background-color: var(--dark-grey-main);
     position: relative;
-    border-right: 10px solid var(--light-grey-sec)
+    border-right: 10px solid var(--light-grey-sec);
+    overflowY: hidden;
   `;
 
 export const sideBarVariants = {
