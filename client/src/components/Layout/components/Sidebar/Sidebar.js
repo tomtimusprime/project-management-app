@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Nav, Button } from "react-bootstrap";
+<<<<<<< HEAD
 import './utils/Sidebar.css'
 import {
   Avatar,
@@ -16,6 +17,14 @@ import { useAnimation, motion, AnimatePresence } from "framer-motion";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, Router } from "react-router-dom";
 import GuestImg from "../../../../assets/images/guest-avatar.jpg";
+=======
+import { Avatar, SideMenu, sideBarVariants } from './utils/utils'
+import { useAnimation } from "framer-motion";
+import { useAuth0 } from '@auth0/auth0-react';
+import history from '../../../../utils/history'
+import { Link, Router } from 'react-router-dom'
+import GuestImg from '../../../../assets/images/guest-avatar.jpg'
+>>>>>>> b2f79d9d0e31dacbf2c632a1feabd4d3b4ed9299
 const Sidebar = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
 

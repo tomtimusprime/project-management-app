@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Jumbotron, Row, Col, Container } from "react-bootstrap";
 import ProfileCard from "./components/Card/ProfileCard";
 import WorkCard from "./components/Card/WorkCard";
