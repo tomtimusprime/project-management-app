@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Nav, Button } from "react-bootstrap";
-import { Avatar, SideMenu, sideBarVariants } from './utils/utils'
-import { useAnimation } from "framer-motion";
+import { Avatar, SideMenu, sideBarVariants, Divider, childDivVariants } from './utils/utils'
+import { useAnimation, motion, AnimatePresence } from "framer-motion";
 import { useAuth0 } from '@auth0/auth0-react'
+import { Link, BrowserRouter as Router } from 'react-router-dom'
 import GuestImg from '../../../../assets/images/guest-avatar.jpg'
 const Sidebar = ({ children }) => {
   const { user, isAuthenticated } = useAuth0();
@@ -15,10 +16,8 @@ const Sidebar = ({ children }) => {
     controls.start(isOpen)
   }, [isOpen, controls])
 
-
-
   return (
-    <SideMenu variants={sideBarVariants} initial='closed' exit='closed' animate={controls}>
+    <SideMenu variants={sideBarVariants} initial='open' exit='closed' animate={controls}>
       <Row className='mx-0'>
         <Col className='px-0'>
           <Button
@@ -27,25 +26,45 @@ const Sidebar = ({ children }) => {
         </Col>
       </Row>
       {isOpen === 'open' && (
-        <>
-          <Row>
-            <Col className='px-0 d-flex justify-content-center' xs={12}>
-              <Avatar src={isAuthenticated ? user.picture : GuestImg} />
-            </Col>
-          </Row>
-
-          <Nav style={{ color: 'white' }} className='flex-column justify-content-center' as='ul'>
-            <Nav.Item className='text-center py-2' href='#' as='li'>
-              <Nav.Link>Dashboard</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className='text-center py-2' href='#' as='li'>
-              <Nav.Link>Projects</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className='text-center py-2' href='#' as='li'>
-              <Nav.Link>Issues</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </>
+        <AnimatePresence>
+          <motion.div
+            variants={childDivVariants}
+            initial='closed'
+            exit='closed'
+            animate='open'
+          >
+            <Row>
+              <Col className='px-0 d-flex justify-content-center' xs={12}>
+                <Avatar src={isAuthenticated ? user.picture : GuestImg} />
+              </Col>
+            </Row>
+            <Row className='pt-2'>
+              <Col>
+                <h6>Hello,</h6>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h5 className='text-center'>User</h5>
+              </Col>
+            </Row>
+            <Divider />
+            <Nav style={{ color: 'white' }} className='flex-column justify-content-center' as='ul'>
+              <Router>
+                <Nav.Item className='text-center py-2' href='#' as='li'>
+                  <Link to='/home'>Dashboard</Link>
+                </Nav.Item>
+                <Nav.Item className='text-center py-2' href='#' as='li'>
+                  <Link to='/projects'>Projects</Link>
+                </Nav.Item>
+                <Nav.Item className='text-center py-2' href='#' as='li'>
+                  <Link to=''>Issues</Link>
+                </Nav.Item>
+              </Router>
+            </Nav>
+            <Divider />
+          </motion.div>
+        </AnimatePresence>
       )}
     </SideMenu>
   );

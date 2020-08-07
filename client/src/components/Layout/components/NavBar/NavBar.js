@@ -8,12 +8,10 @@ const NavBar = () => {
     const { isAuthenticated } = useAuth0();
 
     return (
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar fixed bg="primary" variant="dark">
+            <Navbar.Brand>Project 3</Navbar.Brand>
             <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
+
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

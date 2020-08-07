@@ -19,8 +19,6 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-
-console.log(process.env.MONGO_URL)
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});
 
