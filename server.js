@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 // const mongoose = require("mongoose");
-const routes = require("./routes");
+const mongoose = require("mongoose");
+const userRoutes = require("./routes/user");
 const app = express();
 // const db = require("./mysql-models");
 const PORT = process.env.PORT || 3001;
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-
-
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -17,11 +16,12 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-app.use(routes);
+app.use(userRoutes);
 
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});
 
+mongoose.connect('mongodb://localhost:27017/userdb', {useNewUrlParser: true});
 
 // Start the API server and Connect to the mySQL DB
 const syncOptions = { force: false };

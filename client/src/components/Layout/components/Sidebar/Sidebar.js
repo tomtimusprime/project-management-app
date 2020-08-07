@@ -47,6 +47,8 @@ const Sidebar = ({ children }) => {
         </Col>
       </Row>
       {isOpen === "open" && (
+        <> 
+
         <AnimatePresence>
           <motion.div
             variants={childDivVariants}
@@ -88,10 +90,11 @@ const Sidebar = ({ children }) => {
             <Divider />
           </motion.div>
         </AnimatePresence>
-      )}
       <Row className="endRow">
         <Col>{isAuthenticated ? <LogoutButton style={{float: 'bottom'}} /> : <LoginButton style={{float: 'bottom'}} />}</Col>
       </Row>
+        </>
+      )}
     </SideMenu>
   );
 };

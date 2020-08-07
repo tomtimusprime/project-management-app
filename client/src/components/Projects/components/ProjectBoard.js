@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const CustCard = styled.div`
     width:100%;
-    border: 2px solid #ccc;
+    border: 2px solid var(--light-grey-sec);
     border-radius: 5px;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .25);
     height: 500px;
@@ -14,8 +14,8 @@ const CustCard = styled.div`
 `
 
 const CardHeader = styled.div`
-    border-bottom: 1px solid #ccc;
-    background-color: #ccc;
+    border-bottom: 1px solid var(--light-grey-sec);
+    background-color: var(--light-grey-sec);
     padding: 1rem;
 `
 

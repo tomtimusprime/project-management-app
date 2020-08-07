@@ -8,7 +8,7 @@ const NavBar = () => {
     const { isAuthenticated } = useAuth0();
 
     return (
-        <Navbar fixed bg="primary" variant="dark">
+        <Navbar fixed style={{backgroundColor: 'var(--dark-grey-main)'}} >
             <Navbar.Brand>Project 3</Navbar.Brand>
             <Nav className="mr-auto">
 
