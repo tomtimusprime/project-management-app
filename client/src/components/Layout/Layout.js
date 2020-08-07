@@ -8,11 +8,11 @@ const MainDiv = styled.div`
 `;
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div >
       <Navbar />
       <MainDiv>
         <Sidebar />
-        <div style={{ flexGrow: 1, backgroundColor: "#C4C4C4" }}>{children}</div>
+        <div style={{ flexGrow: 1, backgroundColor: "var(--light-grey-main)" }}>{children}</div>
       </MainDiv>
     </div>
   );

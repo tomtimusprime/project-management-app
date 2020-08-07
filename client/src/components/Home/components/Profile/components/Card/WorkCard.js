@@ -4,7 +4,7 @@ import "./Card.css";
 class WorkCard extends Component {
     render(){
         return (
-            <div className="card py-3">
+            <div className="card">
                 <h1>Open Items:</h1>
                 <h1 className="data"> Number of Open Projects: {this.props.OpenProjects} </h1>
                 <h1 className="data"> Number of Open Issues: {this.props.OpenIssues} </h1>
