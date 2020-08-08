@@ -61,7 +61,7 @@ module.exports = {
         console.log("Access granted for user with JWT")
         db.User
           .update(
-            { email:mongoUser[0].email, "project.projectName": req.body.projectName },
+            { email: mongoUser[0].email, "project.projectName": req.params.projectName },
             { $set: { "projects.$.inProgress": req.body.inProgress } })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email }).populate("issues").then((data) => { res.json(data) });
@@ -80,7 +80,7 @@ module.exports = {
         console.log("Access granted for user with JWT")
         db.User
           .update(
-            { email:mongoUser[0].email, "project.projectName": req.body.projectName },
+            { email: mongoUser[0].email, "project.projectName": req.params.projectName },
             { $set: { "projects.$.completed": req.body.completed } })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email }).populate("issues").then((data) => { res.json(data) });
