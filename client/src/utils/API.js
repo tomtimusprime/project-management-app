@@ -17,4 +17,8 @@ export const API = {
     const data = await axios.delete('/api/projects/' + id);
     return data;
   },
+  getUser: async () => {
+    const {data} = await axios.get('/api/user');
+    return data;
+  }
 }

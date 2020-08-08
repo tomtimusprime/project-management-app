@@ -45,7 +45,6 @@ const Profile = (props) => {
   const checkDuplicate = (newUser,userList)=>{
     for(let i = 0; i < userList.length; i++){
       if(userList[i].email===newUser.email){
-        console.log("Welcome Back");
         return;
       }
     }
@@ -53,23 +52,16 @@ const Profile = (props) => {
   }
   let start = async ()=>{
     let p = await axios.post("/cookie",user);
-      console.log(p)
-    // let p =  await axios.get("/api/user");
-    // console.log(p);
   }
 
   useEffect( () =>{
     if (isAuthenticated) {
       start();
     }
-    else {
-      console.log("incorrect login")
-    }
-  });
+  }, []);
 
   return (
     <>
-      {console.log(user)}
       <CustomJumbotron>
         <Row>
           <Col>
