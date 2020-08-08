@@ -51,10 +51,16 @@ const Profile = (props) => {
     }
     saveUser(newUser);
   }
+  let start = async ()=>{
+    let p = await axios.post("/cookie",user);
+      console.log(p)
+    // let p =  await axios.get("/api/user");
+    // console.log(p);
+  }
 
-  useEffect(() => {
+  useEffect( () =>{
     if (isAuthenticated) {
-      loadUsers();
+      start();
     }
     else {
       console.log("incorrect login")
