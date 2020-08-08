@@ -11,4 +11,9 @@ router
     .route("/api/user/projects")
     .post(userController.addProject)
 
+router
+    .route("/api/user/issues")
+    .post(userController.addIssue)
+    .get(userController.updateIssue)
+
 module.exports = router; 

@@ -10,8 +10,10 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT")
         db.User
-          .create({ email: req.body.email })
-          .then(dbModel => res.json(dbModel))
+          .create({ email: monogoUser[0].email })
+          .then((dbModel) =>{
+            db.User.find({email:mongoUser[0].email}).populate("issues").then((data)=>{res.json(data)});
+          })
           .catch(err => res.status(422).json(err));
       } else {
         console.log("Access denied for user with JWT")
@@ -26,7 +28,7 @@ module.exports = {
         console.log(mongoUser)
         console.log("Access granted for user with JWT")
         db.User
-          .find({ email: mongoUser[0].email })
+          .find({ email: mongoUser[0].email }).populate("issues")
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
       } else {
@@ -41,8 +43,48 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT")
         db.User
-          .update({}, {})
-          .then(dbModel => res.json(dbModel))
+          .update({email:mongoUser[0].email}, {$push: {projects:req.body}})
+          .then((dbModel) =>{
+            db.User.find({email:mongoUser[0].email}).populate("issues").then((data)=>{res.json(data)});
+          })
+          .catch(err => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT")
+        res.json({ loggedIn: false })
+      }
+    })(req, res, next);
+  },
+  //Add Issue to User
+  addIssue: function (req, res, next) {
+    passport.authenticate('jwt', async function (err, mongoUser, info) {
+      console.log(mongoUser)
+      if (mongoUser) {
+        console.log("Access granted for user with JWT")
+        db.Issues
+          .create(req.body)
+          .then(({ _id }) => {
+           db.User.findOneAndUpdate({ email: mongoUser[0].email }, { $push: { issues: _id } }, { new: true })
+           .then((data)=>{
+             db.User.find({email:mongoUser[0].email}).populate("issues").then((data)=>{res.json(data)});
+           })
+          })
+          .catch(err => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT")
+        res.json({ loggedIn: false })
+      }
+    })(req, res, next);
+  },
+  //update Issue
+  updateIssue: function (req, res, next) {
+    passport.authenticate('jwt', async function (err, mongoUser, info) {
+      if (mongoUser) {
+        console.log("Access granted for user with JWT")
+        db.Issues
+          .update({ issueName: "issue"},{completed:true})
+          .then((dbModel) => {
+            db.User.find({email:mongoUser[0].email}).populate("issues").then((data)=>{res.json(data)});
+          })
           .catch(err => res.status(422).json(err));
       } else {
         console.log("Access denied for user with JWT")
