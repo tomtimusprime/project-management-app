@@ -11,17 +11,6 @@ const MoveButton = styled(Button)`
   padding: .25rem;
 `;
 
-const HoverDiv = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const ProjectCard = () => {
   return (
     <>
