@@ -4,7 +4,8 @@ import history from "./utils/history";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Router, Switch, Route } from "react-router-dom";
 import Profile from "./components/Home/components/Profile/Profile";
-import Projects from './components/Projects/Projects'
+import Projects from './components/Projects/Projects';
+import SingleProject from './components/Projects/SingleProject';
 import Loading from "./components/Loading/Loading";
 import Layout from "./components/Layout/Layout";
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Switch>
           <Route exact path='/projects' component={Projects} />
           <Route exact path="/" component={Profile} />
+          <Route exact path='/singleproject' component={SingleProject} />
         </Switch>
       </Layout>
     </Router>
