@@ -12,7 +12,7 @@ router
     .post(userController.addProject)
 
 router
-    .route("/api/user/projects/progress/:projectName")
+    .route("/api/user/projects/inProgress/:projectName")
     .put(userController.updateProjectProgress)
 
 router
