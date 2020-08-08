@@ -12,6 +12,14 @@ router
     .post(userController.addProject)
 
 router
+    .route("/api/user/projects/progress")
+    .put(userController.updateProjectProgress)
+
+router
+    .route("/api/user/projects/completed")
+    .put(userController.updateProjectCompleted)
+
+router
     .route("/api/user/issues")
     .post(userController.addIssue)
     .get(userController.updateIssue)
