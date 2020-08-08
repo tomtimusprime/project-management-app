@@ -8,12 +8,16 @@ const userSchema = new Schema({
     },
   projects: [{ 
     projectName:String,
+    Date: {
+      type: Date,
+      default: Date.now()
+    },
     issues:[
         {
             issueName:String,
             description: String,
             priority: String,
-            Completed: Boolean
+            completed: Boolean
         }
     ]
 

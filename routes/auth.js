@@ -4,6 +4,7 @@ const authController = require("../controllers/authController");
 
 router
     .route("/cookie")
-    .post(authController.createToken);
+    .post(authController.createToken)
+    .get(authController.deleteToken)
 
 module.exports = router; 

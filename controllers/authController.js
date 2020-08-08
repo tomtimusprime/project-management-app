@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = require("../config/jwt-config");
 
 module.exports = {
+    //create token and MongoAtlas user account.... send front end MongoAtlas user.
     createToken: function (req, res, next) {
         if(req.cookies.jwt === undefined){
             const payload = {
@@ -17,16 +18,25 @@ module.exports = {
             .find({email:req.body.email})
             .then((dbUser) => {
                 if(dbUser.length === 0){
-                    db.User.create({email:req.body.email})
+                    db.User.create({email:req.body.email, projects:{projectName:"schwynnn"}})
                     .then((dbUser)=>{
-                        console.log(dbUser)
+                        console.log(dbUser);
+                        res.json(dbUser);
                     })
                 }else{
-                    console.log("userFound")
+                    console.log("userFound");
                     console.log(dbUser);
-                    res.json(dbUser)
+                    res.json(dbUser);
                 }
             })
             .catch(err => res.status(422).json(err));
+    },
+    deleteToken: function (req, res, next) {
+        if(req.cookies.jwt){
+            res.clearCookie("jwt");
+            res.json({logOut:true});
+        }else{
+            res.json({logOut:true});
+        }
     }
 };
