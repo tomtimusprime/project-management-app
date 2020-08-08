@@ -24,7 +24,7 @@ const HoverDiv = styled.div`
 
 const ProjectCard = () => {
   return (
-    <md>
+    <>
         <Row className='d-flex align-items-center py-2'>
           <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Name</h6></Col>
           <Col  className='px-lg-0 py-lg-1' xl={3}><h6>Created at:</h6></Col>
@@ -33,7 +33,7 @@ const ProjectCard = () => {
         <MoveButton>Move</MoveButton>
           </Col>
         </Row>
-    </md>
+    </>
   );
 };
 
