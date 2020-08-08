@@ -1,6 +1,6 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const jwtSecret = require("./jwt-config");
-const db = require("../mysql-models");
+const db = require("../models");
 
 module.exports = passport => {
   const opts = {
@@ -13,7 +13,7 @@ module.exports = passport => {
   passport.use(
     "jwt",
     new JwtStrategy(opts, async (jwtpayload, cb) => {
-      const data = await db.user.findOne({where: { email: jwtpayload.email }});
+      const data = await db.User.find({email:jwtpayload.email});
       if (data) {
         return cb(null, data, {loggedIn:true});
       } else {
