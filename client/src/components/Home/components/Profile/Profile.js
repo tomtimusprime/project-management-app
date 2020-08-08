@@ -56,6 +56,10 @@ const Profile = (props) => {
       console.log(p)
     // let p =  await axios.get("/api/user");
     // console.log(p);
+    // let c = await axios.get("/api/user/issues")
+    // console.log(c);
+    let d = await axios.post("/api/user/issues",{issueName: "issue",projectName: "name of project"})
+    console.log(d)
   }
 
   useEffect( () =>{
