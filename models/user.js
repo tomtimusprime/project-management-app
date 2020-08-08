@@ -8,6 +8,14 @@ const userSchema = new Schema({
   },
   projects: [{
     projectName: String,
+    completed: {
+      type: Boolean,
+      default: false
+    },
+    inProgress: {
+      type: Boolean,
+      default: false
+    },
     Date: {
       type: Date,
       default: Date.now()
@@ -15,8 +23,8 @@ const userSchema = new Schema({
   }],
   issues: [{
     type: Schema.Types.ObjectId,
-    ref:"Issues"
-}],
+    ref: "Issues"
+  }],
   Date: {
     type: Date,
     default: Date.now()
