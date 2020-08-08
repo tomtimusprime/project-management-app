@@ -2,13 +2,12 @@ import React, { Component,useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Jumbotron, Row, Col, Container } from "react-bootstrap";
-import ProfileCard from "./components/Card/ProfileCard";
-import WorkCard from "./components/Card/WorkCard";
-import HistoryCard from "./components/Card/HistoryCard";
+// import ProfileCard from "./components/Card/ProfileCard";
+// import WorkCard from "./components/Card/WorkCard";
+// import HistoryCard from "./components/Card/HistoryCard";
 import styled from "styled-components";
-import GuestImg from '../../../../assets/images/guest-avatar.jpg'
 import { useAuth0 } from "@auth0/auth0-react";
-import Modal from "../../../Modal/Modal.js";
+import Modal from "../Modal/Modal.js";
 const ProfileImg = styled.img`
   height: 100px;
   width: 125px;
@@ -23,6 +22,10 @@ const CustomJumbotron = styled.div`
     color: white;
   }
 `;
+
+const openModal = () => {
+    
+}
 
 const Profile = (props) => {
 
@@ -65,27 +68,12 @@ const Profile = (props) => {
   return (
     <>
       {console.log(user)}
+      <Modal>
+        <h1> Hello!</h1>
+      </Modal>
       <CustomJumbotron>
-        <Row>
-          <Col>
-            <h1 className="header">Welcome back!</h1>
-            <h1 className="header">User Name</h1>
-          </Col>
-          <Col>
-            <ProfileCard name={"Tom"} title={"Software Engineer"} about={"Based in AZ"}/>
-          </Col>
-        </Row>
       </CustomJumbotron>
       <Container>
-        <Row className="py-5">
-          <Col>
-            <WorkCard />
-          </Col>
-          <Col>
-            <HistoryCard />
-          </Col>
-        </Row>
-        <br></br>
       </Container>
     </>
   );
