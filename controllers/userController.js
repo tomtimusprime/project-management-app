@@ -61,8 +61,8 @@ module.exports = {
         console.log("Access granted for user with JWT")
         db.User
           .update(
-            { email:mongoUser[0].email, "project.projectName": req.params.projectName },
-            { $set: { "projects.$.inProgress": req.body.inProgress } })
+            { email:mongoUser[0].email, 'projects.projectName': req.params.projectName },
+            { '$set': { 'projects.$.inProgress': req.body.inProgress } })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email }).populate("issues").then((data) => { res.json(data) });
           })
@@ -79,9 +79,9 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT")
         db.User
-          .update(
-            { email:mongoUser[0].email, "project.projectName": req.params.projectName },
-            { $set: { "projects.$.completed": req.body.completed } })
+          .updateOne(
+            { email:mongoUser[0].email, 'projects.projectName': req.params.projectName },
+            { '$set': { 'projects.$.completed': req.body.completed } })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email }).populate("issues").then((data) => { res.json(data) });
           })
@@ -119,7 +119,7 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT")
         db.Issues
-          .update({ issueName: "issue" }, { completed: true })
+          .updateOne({ issueName: "issue" }, { completed: true })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email }).populate("issues").then((data) => { res.json(data) });
           })
