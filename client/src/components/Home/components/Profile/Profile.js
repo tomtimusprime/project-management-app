@@ -1,4 +1,4 @@
-import React, { Component,useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Jumbotron, Row, Col, Container } from "react-bootstrap";
@@ -6,7 +6,7 @@ import ProfileCard from "./components/Card/ProfileCard";
 import WorkCard from "./components/Card/WorkCard";
 import HistoryCard from "./components/Card/HistoryCard";
 import styled from "styled-components";
-import GuestImg from '../../../../assets/images/guest-avatar.jpg'
+import GuestImg from "../../../../assets/images/guest-avatar.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
 import Modal from "../../../Modal/Modal.js";
 const ProfileImg = styled.img`
@@ -18,66 +18,67 @@ const CustomJumbotron = styled.div`
   background-color: var(--dark-grey-main);
   border-top-left-radius: 0;
   padding: 4rem 2rem;
-  
+
   .header {
     color: white;
   }
 `;
 
 const Profile = (props) => {
-
   const { user, isAuthenticated } = useAuth0();
   const params = { email: user.email };
 
   const loadUsers = () => {
     axios
-    .get('/api/user')
-    .then((res)=>{
-      const savedUsers = res.data
-      checkDuplicate(params,savedUsers)
-    })
-    .catch(err=>console.log(err))
-  }
+      .get("/api/user")
+      .then((res) => {
+        const savedUsers = res.data;
+        checkDuplicate(params, savedUsers);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const saveUser = (newUser) => {
-    return axios.post('/api/user', newUser);
-  }
+    return axios.post("/api/user", newUser);
+  };
 
-  const checkDuplicate = (newUser,userList)=>{
-    for(let i = 0; i < userList.length; i++){
-      if(userList[i].email===newUser.email){
-        console.log("Welcome Back");
+  const checkDuplicate = (newUser, userList) => {
+    for (let i = 0; i < userList.length; i++) {
+      if (userList[i].email === newUser.email) {
         return;
       }
     }
     saveUser(newUser);
-  }
-  let start = async ()=>{
+  };
+  let start = async () => {
     let p = await axios.post("/cookie",user);
       console.log(p)
     // let p =  await axios.get("/api/user");
     // console.log(p);
     // let c = await axios.get("/api/user/issues")
     // console.log(c);
-    let d = await axios.post("/api/user/issues",{issueName: "issue",projectName: "name of project"})
-    console.log(d)
-    let t = "New Project"
-    let z = await axios.put("/api/user/projects/inProgress/"+t,{inProgress:true})
-    console.log(z);
-  }
+    // let d = await axios.post("/api/user/issues",{issueName: "issue",projectName: "name of project"})
+    // console.log(d)
+    // let t = "New Project"
+    // let z = await axios.put("/api/user/projects/inProgress/"+t,{inProgress:true})
+    // console.log(z);
+    
+    let zq = await axios.put("/api/user/issues/5f2f5792aecb371754edca87", {
+        issueId: "5f2f58be015c5f493451aef4",
+        completed: true
+    });
+    console.log(zq);
 
-  useEffect( () =>{
+  };
+
+  useEffect(() => {
     if (isAuthenticated) {
       start();
     }
-    else {
-      console.log("incorrect login")
-    }
-  });
+  }, []);
 
   return (
     <>
-      {console.log(user)}
       <CustomJumbotron>
         <Row>
           <Col>
@@ -85,7 +86,11 @@ const Profile = (props) => {
             <h1 className="header">User Name</h1>
           </Col>
           <Col>
-            <ProfileCard name={"Tom"} title={"Software Engineer"} about={"Based in AZ"}/>
+            <ProfileCard
+              name={"Tom"}
+              title={"Software Engineer"}
+              about={"Based in AZ"}
+            />
           </Col>
         </Row>
       </CustomJumbotron>

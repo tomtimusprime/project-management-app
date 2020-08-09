@@ -20,7 +20,7 @@ router
     .put(userController.updateProjectCompleted)
 
 router
-    .route("/api/user/issues")
+    .route("/api/user/issues/:projectId")
     .post(userController.addIssue)
     .put(userController.updateIssue)
 
