@@ -6,7 +6,6 @@ const AddProjectModal = ({ show, handleClose }) => {
     projectName: '',
     priority: 'High',
     stage: 'New',
-    createdAt: '',
     contributors: '',
     description: '',
     issues: ''

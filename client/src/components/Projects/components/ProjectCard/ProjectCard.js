@@ -29,31 +29,17 @@ const ProjectCard = ({ name, createdAt, id, issues, inProgress, completed, setUs
   }
   const date = new Date(createdAt).toLocaleDateString();
   return (
-    <div>
-      <Row className="d-flex align-items-center py-2">
-        <Col className="px-lg-0 py-lg-1" xl={3}>
-          <h6>{name}</h6>
-        </Col>
-        <Col className="px-lg-0 py-lg-1" xl={3}>
-          <h6>{date}</h6>
-        </Col>
-        <Col className="px-lg-0 py-lg-1" xl={3}>
-          <h6>{issues}</h6>
-        </Col>
-        <Col className="px-lg-0 py-lg-1" xl={3}>
-          {completed && (
-            <MoveButton variant='danger' data-id={id} onClick={handleMove}>
-              Delete
-            </MoveButton>
-          )}
-          {!completed && (
-            <MoveButton data-id={id} onClick={handleMove}>
-            Move
-          </MoveButton>
-          )}
-        </Col>
-      </Row>
-    </div>
+    <>
+        <Row className='d-flex align-items-center py-2'>
+          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Project Name:</h6></Col>
+          <Col  className='px-lg-0 py-lg-1' xl={3}><h6>Created at:</h6></Col>
+          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Issues:</h6></Col>
+          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Contributors:</h6></Col>
+          <Col className='px-lg-0 py-lg-1'  xl={3}>
+        <MoveButton>Move</MoveButton>
+          </Col>
+        </Row>
+    </>
   );
 };
 

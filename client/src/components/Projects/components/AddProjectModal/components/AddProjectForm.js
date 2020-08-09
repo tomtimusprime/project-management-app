@@ -28,12 +28,6 @@ const AddIssueForm = ({handleInputChange, handleSubmit, values}) => {
           <option>Completed</option>
         </Form.Control>
       </Form.Group>
-      <Form.Group controlId="createdAt">
-        <Form.Label>Created At:</Form.Label>
-        <Form.Control value={values.createdAt} onChange={handleInputChange} name="createdAt" as="input">
-
-        </Form.Control>
-      </Form.Group>
       <Form.Group controlId="contributors">
         <Form.Label>Contributors:</Form.Label>
         <Form.Control value={values.contributors} onChange={handleInputChange} name="contributors" as="input">
