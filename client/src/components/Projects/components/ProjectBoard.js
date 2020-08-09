@@ -11,7 +11,7 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div``;
-const ProjectBoard = ({ projects }) => {
+const ProjectBoard = ({ projects, setUserData }) => {
   return (
     <CustCard>
       <Card.Body className="w-100">
@@ -25,7 +25,7 @@ const ProjectBoard = ({ projects }) => {
         {projects.map((i) => (
           <Row>
             <Col>
-              <ProjectCard id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
+              <ProjectCard setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
             </Col>
           </Row>
         ))}

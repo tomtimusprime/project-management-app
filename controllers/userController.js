@@ -92,22 +92,40 @@ module.exports = {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
       if (mongoUser) {
         console.log("Access granted for user with JWT");
-        const path = `projects.$.${req.body.field}`
-        db.User.update(
-          {
-            email: mongoUser[0].email,
-            "projects._id": req.params.id,
-          },
-          { $set: { path: req.body.status } }
-        )
-          .then((dbModel) => {
-            db.User.find({ email: mongoUser[0].email })
-              .populate("issues")
-              .then((data) => {
-                res.json(data);
-              });
-          })
-          .catch((err) => res.status(422).json(err));
+        const path = `projects.$[j].${req.body.field}`
+        const query = path + " : " + req.body.field
+        console.log(query)
+        console.log(req.body)
+        console.log(req.params.id)
+        if (req.body.field === 'completed') {
+          db.User.update(
+            {
+              "email": mongoUser[0].email,
+            },
+            { $set: { 'projects.$[j].completed': req.body.status } },
+            { arrayFilters: [{ 'j._id': mongoose.Types.ObjectId(req.params.id) }] },
+          )
+            .then((data) => {
+              res.json(data);
+            })
+            .catch((err) => res.status(422).json(err));
+        }
+        else if (req.body.field === 'inProgress') {
+          db.User.update(
+            {
+              "email": mongoUser[0].email,
+            },
+            { $set: { 'projects.$[j].inProgress': req.body.status } },
+            { arrayFilters: [{ 'j._id': mongoose.Types.ObjectId(req.params.id) }] },
+          )
+            .then(
+              db.User.find({ email: mongoUser[0].email })
+                .populate("issues")
+                .then((data) => {
+                  res.json(data);
+                })
+                .catch((err) => res.status(422).json(err)))
+        }
       } else {
         console.log("Access denied for user with JWT");
         res.json({ loggedIn: false });

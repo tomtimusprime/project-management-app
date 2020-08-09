@@ -11,23 +11,22 @@ const MoveButton = styled(Button)`
   padding: 0.25rem;
 `;
 
-
-
-const ProjectCard = ({ name, createdAt, id, issues, inProgress, completed }) => {
+const ProjectCard = ({ name, createdAt, id, issues, inProgress, completed, setUserData }) => {
   const handleMove = async e => {
     const { id } = e.target.dataset;
     if (inProgress) {
       const data = await API.setProjectStatus(id, 'completed', true);
-      console.log(data)
+      setUserData(data.data[0])
     }
-    if (completed) {
-      // handle delete
-    }
-     if (!inProgress && !completed) {
+    if (!inProgress && !completed) {
       const data = await API.setProjectStatus(id, 'inProgress', true);
-      console.log(data)
+      setUserData(data.data[0])
     };
-};
+  };
+
+  const handleDelete = async e => {
+
+  }
   const date = new Date(createdAt).toLocaleDateString();
   return (
     <div>
@@ -42,9 +41,16 @@ const ProjectCard = ({ name, createdAt, id, issues, inProgress, completed }) => 
           <h6>{issues}</h6>
         </Col>
         <Col className="px-lg-0 py-lg-1" xl={3}>
-          <MoveButton data-id={id} onClick={handleMove}>
+          {completed && (
+            <MoveButton variant='danger' data-id={id} onClick={handleMove}>
+              Delete
+            </MoveButton>
+          )}
+          {!completed && (
+            <MoveButton data-id={id} onClick={handleMove}>
             Move
           </MoveButton>
+          )}
         </Col>
       </Row>
     </div>

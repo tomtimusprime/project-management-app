@@ -6,7 +6,10 @@ export const API = {
     return data;
   },
   setProjectStatus: async (id, field, status) => {
-    const data = await axios.put("/api/user/projects/inProgress/" + id, {field: field, status: status});
+    const data = await axios.post("/api/user/projects/inProgress/" + id, {field: field, status: status});
     return data;
   },
+  deleteProject: async id => {
+    const data = await axios.delete('')
+  }
 };

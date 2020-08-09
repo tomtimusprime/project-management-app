@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Projects = () => {  
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const [userData, setUserData] = useState(null)
   const [inProgressProjs, setInProgressProjs] = useState([]);
   const [completed, setCompletedProjs] = useState([]);
   const [upcoming, setUpcomingProjs] = useState([]);
@@ -17,14 +17,14 @@ const Projects = () => {
     const fetchUserData = async () => {
         const res = await axios.get(`/api/user`);
         setUpcomingProjs(res.data[0].projects.filter(i => i.inProgress === false && i.completed === false))
-        setInProgressProjs(res.data[0].projects.filter(i => i.inProgress === true))
+        setInProgressProjs(res.data[0].projects.filter(i => i.inProgress === true && i.completed === false))
         setCompletedProjs(res.data[0].projects.filter(i => i.completed === true))
     };
 
     fetchUserData();
-  }, []);
+  }, [userData]);
 
-  console.log(inProgressProjs);
+  console.log(userData)
  
 
   return (
@@ -45,13 +45,13 @@ const Projects = () => {
         </Row>
         <Row>
           <Col lg={4}>
-            <ProjectBoard projects={upcoming} />
+            <ProjectBoard setUserData={setUserData} projects={upcoming} />
           </Col>
           <Col lg={4}>
-            <ProjectBoard projects={inProgressProjs} />
+            <ProjectBoard setUserData={setUserData} projects={inProgressProjs} />
           </Col>
           <Col lg={4}>
-            <ProjectBoard projects={completed} />
+            <ProjectBoard setUserData={setUserData} projects={completed} />
           </Col>
         </Row>
         <AddIssueModal

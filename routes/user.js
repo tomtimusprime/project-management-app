@@ -13,7 +13,7 @@ router
 
 router
     .route("/api/user/projects/inProgress/:id")
-    .put(userController.updateProjectProgress)
+    .post(userController.updateProjectProgress)
 
 // router
 //     .route("/api/user/projects/completed/:id")
