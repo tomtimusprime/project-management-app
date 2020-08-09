@@ -32,38 +32,38 @@ const Profile = (props) => {
   const { user, isAuthenticated } = useAuth0();
   const params = { email: user.email };
 
-  const loadUsers = () => {
-    axios
-    .get('/api/user')
-    .then((res)=>{
-      const savedUsers = res.data
-      checkDuplicate(params,savedUsers)
-    })
-    .catch(err=>console.log(err))
-  }
+  // const loadUsers = () => {
+  //   axios
+  //   .get('/api/user')
+  //   .then((res)=>{
+  //     const savedUsers = res.data
+  //     checkDuplicate(params,savedUsers)
+  //   })
+  //   .catch(err=>console.log(err))
+  // }
 
-  const saveUser = (newUser) => {
-    return axios.post('/api/user', newUser);
-  }
+  // const saveUser = (newUser) => {
+  //   return axios.post('/api/user', newUser);
+  // }
 
-  const checkDuplicate = (newUser,userList)=>{
-    for(let i = 0; i < userList.length; i++){
-      if(userList[i].email===newUser.email){
-        console.log("Welcome Back");
-        return;
-      }
-    }
-    saveUser(newUser);
-  }
+  // const checkDuplicate = (newUser,userList)=>{
+  //   for(let i = 0; i < userList.length; i++){
+  //     if(userList[i].email===newUser.email){
+  //       console.log("Welcome Back");
+  //       return;
+  //     }
+  //   }
+  //   saveUser(newUser);
+  // }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      loadUsers();
-    }
-    else {
-      console.log("incorrect login")
-    }
-  });
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     loadUsers();
+  //   }
+  //   else {
+  //     console.log("incorrect login")
+  //   }
+  // });
 
   return (
     <>

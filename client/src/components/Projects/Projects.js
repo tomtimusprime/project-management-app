@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ProjectBoard from "./components/ProjectBoard";
-import { API } from "../../utils/API";
+import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
+import axios from "axios";
+
 const Projects = () => {
   const { user, isAuthenticated } = useAuth0();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const [data, setData] = useState();
 
+  const fetchUserData = async () => {
+    try {
+      const { data } = await axios.get(`/api/user`);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error, "in fetchdata");
+    }
+  };
+
   useEffect(() => {
-    const userData = API.getUser();
+    const userData = fetchUserData();
     setData(userData);
   }, []);
 

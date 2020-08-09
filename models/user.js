@@ -1,34 +1,42 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const issueSchema = new Schema({
+  issueName: {
+    type: String,
+    required: true
+  },
+  priority: String,
+  description: String,
+  completed: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const projectSchema = new Schema({
+  projectName: String,
+  completed: {
+    type: Boolean,
+    default: false
+  },
+  inProgress: {
+    type: Boolean,
+    default: false
+  },
+  Date: {
+    type: Date,
+    default: Date.now()
+  },
+  issues: [issueSchema]
+})
+
 const userSchema = new Schema({
   email: {
     type: String,
     required: true
   },
-  projects: [{
-    projectName: String,
-    completed: {
-      type: Boolean,
-      default: false
-    },
-    inProgress: {
-      type: Boolean,
-      default: false
-    },
-    Date: {
-      type: Date,
-      default: Date.now()
-    }
-  }],
-  issues: [{
-    type: Schema.Types.ObjectId,
-    ref: "Issues"
-  }],
-  Date: {
-    type: Date,
-    default: Date.now()
-  }
+  projects: [projectSchema]
 });
 
 const User = mongoose.model("User", userSchema);

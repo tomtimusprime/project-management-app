@@ -21,7 +21,7 @@ const AddIssueModal = ({ show, handleClose }) => {
   }
   return (
     <div>
-      <Modal show={show}>
+      <Modal onHide={handleClose} show={show}>
         <Modal.Header>
           <Modal.Title>Add Issue:</Modal.Title>
         </Modal.Header>
