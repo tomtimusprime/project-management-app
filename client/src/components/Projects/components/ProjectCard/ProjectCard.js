@@ -15,9 +15,10 @@ const ProjectCard = () => {
   return (
     <>
         <Row className='d-flex align-items-center py-2'>
-          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Name</h6></Col>
+          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Project Name:</h6></Col>
           <Col  className='px-lg-0 py-lg-1' xl={3}><h6>Created at:</h6></Col>
           <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Issues:</h6></Col>
+          <Col className='px-lg-0 py-lg-1'  xl={3}><h6>Contributors:</h6></Col>
           <Col className='px-lg-0 py-lg-1'  xl={3}>
         <MoveButton>Move</MoveButton>
           </Col>

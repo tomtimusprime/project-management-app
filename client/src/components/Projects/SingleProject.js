@@ -68,11 +68,6 @@ const Profile = (props) => {
   return (
     <>
       {console.log(user)}
-      <Modal>
-        <h1> Hello!</h1>
-      </Modal>
-      <CustomJumbotron>
-      </CustomJumbotron>
       <Container>
       </Container>
     </>
