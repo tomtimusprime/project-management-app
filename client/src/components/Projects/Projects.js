@@ -7,26 +7,30 @@ import { useAuth0 } from "@auth0/auth0-react";
 import AddProjectModal from "./components/AddProjectModal/AddProjectModal";
 import axios from "axios";
 
-const Projects = () => {  
+const Projects = () => {
+  const { isAuthenticated } = useAuth0();
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [userData, setUserData] = useState(null)
   const [inProgressProjs, setInProgressProjs] = useState([]);
   const [completed, setCompletedProjs] = useState([]);
   const [upcoming, setUpcomingProjs] = useState([]);
-
   useEffect(() => {
-    const fetchUserData = async () => {
+    if (isAuthenticated) {
+      const fetchUserData = async () => {
         const res = await axios.get(`/api/user`);
         setUpcomingProjs(res.data[0].projects.filter(i => i.inProgress === false && i.completed === false))
         setInProgressProjs(res.data[0].projects.filter(i => i.inProgress === true && i.completed === false))
         setCompletedProjs(res.data[0].projects.filter(i => i.completed === true))
-    };
+      };
+      fetchUserData();
+    }
 
-    fetchUserData();
   }, [userData]);
 
+
   console.log(userData)
- 
+
 
   return (
     <div>
