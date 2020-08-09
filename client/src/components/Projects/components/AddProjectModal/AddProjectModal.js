@@ -5,8 +5,11 @@ const AddProjectModal = ({ show, handleClose }) => {
   const [projectForm, setProjectForm] = useState({
     projectName: '',
     priority: 'High',
+    stage: 'New',
+    createdAt: '',
     contributors: '',
-    description: ''
+    description: '',
+    issues: ''
   })
 
   const handleInputChange = e => {
@@ -24,7 +27,7 @@ const AddProjectModal = ({ show, handleClose }) => {
     <div>
       <Modal onHide={handleClose} show={show}>
         <Modal.Header>
-          <Modal.Title>Add Issue:</Modal.Title>
+          <Modal.Title>Add Project:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form values={projectForm} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
