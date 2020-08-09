@@ -62,32 +62,8 @@ module.exports = {
       }
     })(req, res, next);
   },
-  //update Project
-  // updateProjectProgress: function (req, res, next) {
-  //   passport.authenticate("jwt", async function (err, mongoUser, info) {
-  //     if (mongoUser) {
-  //       console.log("Access granted for user with JWT");
-  //       db.User.update(
-  //         {
-  //           email: mongoUser[0].email,
-  //           "projects._id": req.params.id,
-  //         },
-  //         { $set: { "projects.$.inProgress": req.body.inProgress } }
-  //       )
-  //         .then((dbModel) => {
-  //           db.User.find({ email: mongoUser[0].email })
-  //             .populate("issues")
-  //             .then((data) => {
-  //               res.json(data);
-  //             });
-  //         })
-  //         .catch((err) => res.status(422).json(err));
-  //     } else {
-  //       console.log("Access denied for user with JWT");
-  //       res.json({ loggedIn: false });
-  //     }
-  //   })(req, res, next);
-  // },
+
+
   updateProjectProgress: function (req, res, next) {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
       if (mongoUser) {
@@ -133,31 +109,6 @@ module.exports = {
     })(req, res, next);
   },
 
-  // updateProjectCompleted: function (req, res, next) {
-  //   passport.authenticate("jwt", async function (err, mongoUser, info) {
-  //     if (mongoUser) {
-  //       console.log("Access granted for user with JWT");
-  //       db.User.updateOne(
-  //         {
-  //           email: mongoUser[0].email,
-  //           "projects._id": req.params.id,
-  //         },
-  //         { $set: { "projects.$.completed": req.body.completed } }
-  //       )
-  //         .then((dbModel) => {
-  //           db.User.find({ email: mongoUser[0].email })
-  //             .populate("issues")
-  //             .then((data) => {
-  //               res.json(data);
-  //             });
-  //         })
-  //         .catch((err) => res.status(422).json(err));
-  //     } else {
-  //       console.log("Access denied for user with JWT");
-  //       res.json({ loggedIn: false });
-  //     }
-  //   })(req, res, next);
-  // },
   //Add Issue to User
   addIssue: async (req, res, next) => {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
