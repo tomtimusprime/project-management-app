@@ -3,7 +3,8 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ProjectBoard from "./components/ProjectBoard";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
-import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
+// import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
+import AddProjectModal from "./components/AddProjectModal/AddProjectModal";
 import axios from "axios";
 
 const Projects = () => {
@@ -54,7 +55,7 @@ const Projects = () => {
             <ProjectBoard />
           </Col>
         </Row>
-        <AddIssueModal
+        <AddProjectModal
           show={isModalOpen}
           handleClose={() => {
             setModalOpen(false);
