@@ -63,11 +63,11 @@ const Profile = (props) => {
     // let z = await axios.put("/api/user/projects/inProgress/"+t,{inProgress:true})
     // console.log(z);
     
-    let zq = await axios.put("/api/user/issues/5f2f5792aecb371754edca87", {
-        issueId: "5f2f58be015c5f493451aef4",
-        completed: true
-    });
-    console.log(zq);
+    // let zq = await axios.put("/api/user/issues/5f2f5792aecb371754edca87", {
+    //     issueId: "5f2f58be015c5f493451aef4",
+    //     completed: true
+    // });
+    // console.log(zq);
 
   };
 

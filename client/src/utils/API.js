@@ -1,24 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const API = {
-  getOneProject: async () => {
-    const data = await axios.get('/api/projects/latest');
+  addIssue: async (id, issue) => {
+    const data = await axios.post("/api/user/issues" + id, issue);
     return data;
   },
-  getAllProjects: async () => {
-    const data = await axios.get('/api/projects');
+  setProjectStatus: async (id, field, status) => {
+    const data = await axios.post("/api/user/projects/inProgress/" + id, {field: field, status: status});
     return data;
   },
-  updateProject: async id => {
-    const data = await axios.post('/api/projects/' + id);
-    return data;
-  },
-  deleteOne: async id => {
-    const data = await axios.delete('/api/projects/' + id);
-    return data;
-  },
-  getUser: async () => {
-    const {data} = await axios.get('/api/user');
-    return data;
+  deleteProject: async id => {
+    const data = await axios.delete('')
   }
-}
+};

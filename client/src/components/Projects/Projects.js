@@ -8,25 +8,29 @@ import AddProjectModal from "./components/AddProjectModal/AddProjectModal";
 import axios from "axios";
 
 const Projects = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const [data, setData] = useState();
-
-  const fetchUserData = async () => {
-    try {
-      const { data } = await axios.get(`/api/user`);
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error(error, "in fetchdata");
-    }
-  };
-
+  const [userData, setUserData] = useState(null)
+  const [inProgressProjs, setInProgressProjs] = useState([]);
+  const [completed, setCompletedProjs] = useState([]);
+  const [upcoming, setUpcomingProjs] = useState([]);
   useEffect(() => {
-    const userData = fetchUserData();
-    setData(userData);
-  }, []);
+    if (isAuthenticated) {
+      const fetchUserData = async () => {
+        const res = await axios.get(`/api/user`);
+        setUpcomingProjs(res.data[0].projects.filter(i => i.inProgress === false && i.completed === false))
+        setInProgressProjs(res.data[0].projects.filter(i => i.inProgress === true && i.completed === false))
+        setCompletedProjs(res.data[0].projects.filter(i => i.completed === true))
+      };
+      fetchUserData();
+    }
+
+  }, [userData]);
+
+
+  console.log(userData)
+
 
   return (
     <div>
@@ -46,13 +50,13 @@ const Projects = () => {
         </Row>
         <Row>
           <Col lg={4}>
-            <ProjectBoard />
+            <ProjectBoard setUserData={setUserData} projects={upcoming} />
           </Col>
           <Col lg={4}>
-            <ProjectBoard />
+            <ProjectBoard setUserData={setUserData} projects={inProgressProjs} />
           </Col>
           <Col lg={4}>
-            <ProjectBoard />
+            <ProjectBoard setUserData={setUserData} projects={completed} />
           </Col>
         </Row>
         <AddProjectModal

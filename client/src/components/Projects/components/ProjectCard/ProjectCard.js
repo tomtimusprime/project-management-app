@@ -1,17 +1,33 @@
 import React from "react";
 import "./ProjectCard.css";
 import styled from "styled-components";
-import { Button,Row, Col } from "react-bootstrap";
-
+import { Button, Row, Col } from "react-bootstrap";
+import { API } from "../../../../utils/API";
 
 const MoveButton = styled(Button)`
   width: 5rem;
   height: 3rem;
   border-radius: 0;
-  padding: .25rem;
+  padding: 0.25rem;
 `;
 
-const ProjectCard = () => {
+const ProjectCard = ({ name, createdAt, id, issues, inProgress, completed, setUserData }) => {
+  const handleMove = async e => {
+    const { id } = e.target.dataset;
+    if (inProgress) {
+      const data = await API.setProjectStatus(id, 'completed', true);
+      setUserData(data.data[0])
+    }
+    if (!inProgress && !completed) {
+      const data = await API.setProjectStatus(id, 'inProgress', true);
+      setUserData(data.data[0])
+    };
+  };
+
+  const handleDelete = async e => {
+
+  }
+  const date = new Date(createdAt).toLocaleDateString();
   return (
     <>
         <Row className='d-flex align-items-center py-2'>

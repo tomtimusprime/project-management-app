@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from "./components/AddProjectForm";
-import moment from "moment";
 const AddProjectModal = ({ show, handleClose }) => {
   const [projectForm, setProjectForm] = useState({
     projectName: '',
