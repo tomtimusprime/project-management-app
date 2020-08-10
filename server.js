@@ -5,6 +5,7 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const cookieParser = require("cookie-parser");
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,7 @@ app.use(routes);
 // Connect to the Mongo DB
 
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});
-const db = mongoose.connect('mongodb://localhost:27017/userdb', {useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true });
 
   const startServer = async () => {
   
@@ -33,3 +34,4 @@ const db = mongoose.connect('mongodb://localhost:27017/userdb', {useNewUrlParser
     });
   };
 startServer();
+
