@@ -4,6 +4,7 @@ import axios from "axios";
 import { Row, Col, Container, Button, Card } from "react-bootstrap";
 import IssueCard from "./components/IssueCard/IssueCard";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
+import { CustCard } from './utils/elements.js';
 const SingleProject = (props) => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -72,50 +73,70 @@ const SingleProject = (props) => {
           handleClose={handleClose}
         />
         <Row>
-          <Col md={6}>
-            <Row className="py-5">
-              <Col xs={"auto"}>
-                <Card
-                  style={{
-                    width: "100%",
-                    textAlign: "initial",
-                    height: "auto",
-                  }}
-                >
-                  <Card.Body>
-                    <Card.Title>Description:</Card.Title>
-                    <Card.Text>
-                      {data.description
-                        ? data.description
-                        : "You should leave meaningful descriptions for your projects!"}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+          <Col xs={6}><Row className='py-3'>
+            <Col md={12}>
+
+              <Card
+                style={{
+                  width: "100%",
+                  textAlign: "initial",
+                  height: "auto",
+                }}
+              >
+                <Card.Body>
+                  <Card.Title>Description:</Card.Title>
+                  <Card.Text>
+                    {data.description
+                      ? data.description
+                      : "You should leave meaningful descriptions for your projects!"}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
           </Col>
-          <Col md={6}>
+          <Col xs={6}>
             <Row>
-              <Col>
+              <Col xs={12}>
+                <CustCard>
+                  <Card.Title>Current Issues:</Card.Title>
+                  <Card.Body>
+                    {data.issues && (
+                      <>
+                        {data.issues.map((i) => (
+                          <Row className="mb-3">
+                            <Col xs={12}>
+                              <IssueCard issue={i} />
+                            </Col>
+                          </Row>
+                        ))}
+                      </>
+                    )}
+                  </Card.Body>
+                </CustCard>
                 <h2>Current Issues:</h2>
               </Col>
             </Row>
-            {data.issues && (
-              <>
-                {data.issues.map((i) => (
-                  <Row className="py-3">
-                    <Col xs={12}>
-                      <IssueCard name={i.issueName} />
-                    </Col>
-                  </Row>
-                ))}
-              </>
-            )}
+
           </Col>
         </Row>
+
       </Container>
     </>
   );
 };
 
 export default SingleProject;
+
+{/* <Row>
+<Col md={12}>
+  
+    </Col>
+    <Col md={6}>
+
+      
+    </Col>
+  </Row>
+</Col>
+
+</Row> */}

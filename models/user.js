@@ -8,19 +8,23 @@ const issueSchema = new Schema({
   },
   priority: String,
   description: String,
+  Date: {
+    type: Date,
+    default: Date.now()
+  },
   completed: {
     type: Boolean,
     default: false
   }
 })
 
-const contributorSchema = new Schema({
-  name: {
-    type: String, 
-    required: true
-  },
-  link: String
-})
+// const contributorSchema = new Schema({
+//   name: {
+//     type: String, 
+//     required: true
+//   },
+//   link: String
+// })
 
 const projectSchema = new Schema({
   projectName: String,
@@ -36,10 +40,10 @@ const projectSchema = new Schema({
     type: Date,
     default: Date.now()
   },
+  description: String,
   issues: [issueSchema],
-  contributors: [contributorSchema],
   priority: String,
-  
+
 })
 
 const userSchema = new Schema({
