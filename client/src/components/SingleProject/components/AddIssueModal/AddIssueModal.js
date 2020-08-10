@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { API } from "../../../../utils/API";
 import Form from "./components/AddIssueForm";
-const AddIssueModal = ({ show, handleClose }) => {
+const AddIssueModal = ({ projectId, show, handleClose, setUserData }) => {
   const [issueForm, setIssueForm] = useState({
     issueName: "",
     priority: "High",
@@ -19,7 +19,9 @@ const AddIssueModal = ({ show, handleClose }) => {
 
   const handleSubmit = async (e) => {
     console.log(issueForm);
-    
+    const { data } = await API.addIssue(projectId, issueForm);
+    setUserData(data);
+    handleClose();
   };
   return (
     <div>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const API = {
   addIssue: async (id, issue) => {
-    const data = await axios.post("/api/user/issues" + id, issue);
+    const data = await axios.post("/api/user/issues/" + id, issue);
     return data;
   },
   setProjectStatus: async (id, field, status) => {
