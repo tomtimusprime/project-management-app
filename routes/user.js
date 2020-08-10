@@ -24,7 +24,5 @@ router
     .post(userController.addIssue)
     .put(userController.updateIssue)
 
-router.route('/api/projects/:id')
-.get(userController.findProject)
 
 module.exports = router; 

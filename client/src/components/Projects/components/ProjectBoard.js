@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import ProjectCard from "./ProjectCard/ProjectCard";
-import {Router} from 'react-router-dom'
 const CustCard = styled(Card)`
   height: 35rem;
 `;
@@ -11,7 +10,6 @@ const CardHeader = styled.div`
   border-bottom: 1px solid var(--light-grey-sec);
 `;
 
-const CardBody = styled.div``;
 const ProjectBoard = ({ projects, setUserData, boardName }) => {
   return (
     <CustCard>
@@ -23,10 +21,10 @@ const ProjectBoard = ({ projects, setUserData, boardName }) => {
             </CardHeader>
           </Col>
         </Row>
-        {projects.map((i) => (
-          <Row>
-            <Col>
-              <ProjectCard setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
+        {projects.map((i, ind) => (
+          <Row key={ind * -1}>
+            <Col key={ind}>
+              <ProjectCard key={i._id} setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
             </Col>
           </Row>
         ))}

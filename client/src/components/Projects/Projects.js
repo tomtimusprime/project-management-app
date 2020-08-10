@@ -11,10 +11,13 @@ const Projects = () => {
   const { isAuthenticated } = useAuth0();
 
   const [isModalOpen, setModalOpen] = useState(false);
+
   const [userData, setUserData] = useState(null);
+
   const [inProgressProjs, setInProgressProjs] = useState([]);
   const [completed, setCompletedProjs] = useState([]);
   const [upcoming, setUpcomingProjs] = useState([]);
+
   useEffect(() => {
     if (isAuthenticated) {
       const fetchUserData = async () => {
@@ -70,9 +73,10 @@ const Projects = () => {
           </Col>
         </Row>
         <Row>
-          {projectBoards.map((i) => (
-            <Col md={4}>
+          {projectBoards.map((i, ind) => (
+            <Col key={ind} md={4}>
               <ProjectBoard
+                key={i.name}
                 setUserData={setUserData}
                 projects={i.projects}
                 boardName={i.name}
