@@ -11,26 +11,49 @@ const Projects = () => {
   const { isAuthenticated } = useAuth0();
 
   const [isModalOpen, setModalOpen] = useState(false);
-  const [userData, setUserData] = useState(null)
+
+  const [userData, setUserData] = useState(null);
+
   const [inProgressProjs, setInProgressProjs] = useState([]);
   const [completed, setCompletedProjs] = useState([]);
   const [upcoming, setUpcomingProjs] = useState([]);
+
   useEffect(() => {
     if (isAuthenticated) {
       const fetchUserData = async () => {
         const res = await axios.get(`/api/user`);
-        setUpcomingProjs(res.data[0].projects.filter(i => i.inProgress === false && i.completed === false))
-        setInProgressProjs(res.data[0].projects.filter(i => i.inProgress === true && i.completed === false))
-        setCompletedProjs(res.data[0].projects.filter(i => i.completed === true))
+        setUpcomingProjs(
+          res.data[0].projects.filter(
+            (i) => i.inProgress === false && i.completed === false
+          )
+        );
+        setInProgressProjs(
+          res.data[0].projects.filter(
+            (i) => i.inProgress === true && i.completed === false
+          )
+        );
+        setCompletedProjs(
+          res.data[0].projects.filter((i) => i.completed === true)
+        );
       };
       fetchUserData();
     }
-
   }, [userData]);
 
-
-  console.log(userData)
-
+  const projectBoards = [
+    {
+      name: "Upcoming",
+      projects: upcoming,
+    },
+    {
+      name: "In Progress",
+      projects: inProgressProjs,
+    },
+    {
+      name: "Completed",
+      projects: completed,
+    },
+  ];
 
   return (
     <div>
@@ -39,6 +62,7 @@ const Projects = () => {
           <Col>
             <h1 className="text-center py-3">Projects</h1>
             <Button
+              disabled={!isAuthenticated}
               onClick={() => {
                 setModalOpen(true);
               }}
@@ -49,17 +73,19 @@ const Projects = () => {
           </Col>
         </Row>
         <Row>
-          <Col lg={4}>
-            <ProjectBoard setUserData={setUserData} projects={upcoming} />
-          </Col>
-          <Col lg={4}>
-            <ProjectBoard setUserData={setUserData} projects={inProgressProjs} />
-          </Col>
-          <Col lg={4}>
-            <ProjectBoard setUserData={setUserData} projects={completed} />
-          </Col>
+          {projectBoards.map((i, ind) => (
+            <Col key={ind} md={4}>
+              <ProjectBoard
+                key={i.name}
+                setUserData={setUserData}
+                projects={i.projects}
+                boardName={i.name}
+              />
+            </Col>
+          ))}
         </Row>
         <AddProjectModal
+          setUserData={setUserData}
           show={isModalOpen}
           handleClose={() => {
             setModalOpen(false);

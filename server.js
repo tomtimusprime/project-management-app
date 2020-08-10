@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(cookieParser());
 app.use(routes);
 
-
 // Connect to the Mongo DB
 
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});

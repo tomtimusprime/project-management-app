@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Route exact path='/projects' component={Projects} />
           <Route exact path="/" component={Profile} />
-          <Route exact path='/singleproject' component={SingleProject} />
+          <Route exact path='/projects/:id' component={SingleProject} />
         </Switch>
       </Layout>
     </Router>

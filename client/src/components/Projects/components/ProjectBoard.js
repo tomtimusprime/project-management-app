@@ -10,22 +10,21 @@ const CardHeader = styled.div`
   border-bottom: 1px solid var(--light-grey-sec);
 `;
 
-const CardBody = styled.div``;
-const ProjectBoard = ({ projects, setUserData }) => {
+const ProjectBoard = ({ projects, setUserData, boardName }) => {
   return (
     <CustCard>
       <Card.Body className="w-100">
         <Row>
           <Col>
             <CardHeader className="p-sm-2">
-              <h1 className="text-center">hi</h1>
+              <h3 className="text-center">{boardName}</h3>
             </CardHeader>
           </Col>
         </Row>
-        {projects.map((i) => (
-          <Row>
-            <Col>
-              <ProjectCard setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
+        {projects.map((i, ind) => (
+          <Row key={ind * -1}>
+            <Col key={ind}>
+              <ProjectCard key={i._id} setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
             </Col>
           </Row>
         ))}

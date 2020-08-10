@@ -20,21 +20,6 @@ const AddIssueForm = ({handleInputChange, handleSubmit, values}) => {
           <option>Low</option>
         </Form.Control>
       </Form.Group>
-      <Form.Group controlId="stage">
-        <Form.Label>Stage:</Form.Label>
-        <Form.Control value={values.stage} onChange={handleInputChange} name="stage" as="select">
-          <option>New</option>
-          <option>In Progress</option>
-          <option>Completed</option>
-        </Form.Control>
-      </Form.Group>
-      <Form.Group controlId="contributors">
-        <Form.Label>Contributors:</Form.Label>
-        <Form.Control value={values.contributors} onChange={handleInputChange} name="contributors" as="input">
-      
-        </Form.Control>
-      </Form.Group>
-    
       <Form.Group controlId="exampleForm.ControlTextarea1">
         <Form.Label>Description:</Form.Label>
         <Form.Control value={values.description} onChange={handleInputChange} name="description" as="textarea" rows="3" />
@@ -45,10 +30,3 @@ const AddIssueForm = ({handleInputChange, handleSubmit, values}) => {
   };
 
 export default AddIssueForm;
-
-// <Form.Group controlId="issues">
-// <Form.Label>Issues:</Form.Label>
-// <Form.Control value={values.issues} onChange={handleInputChange} name="issues" as="input">
-
-// </Form.Control>
-// </Form.Group>

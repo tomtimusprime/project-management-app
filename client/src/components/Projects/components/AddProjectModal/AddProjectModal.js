@@ -1,27 +1,28 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from "./components/AddProjectForm";
-const AddProjectModal = ({ show, handleClose }) => {
+import { API } from "../../../../utils/API";
+const AddProjectModal = ({ show, handleClose, setUserData }) => {
   const [projectForm, setProjectForm] = useState({
-    projectName: '',
-    priority: 'High',
-    stage: 'New',
-    contributors: '',
-    description: '',
-    issues: ''
-  })
+    projectName: "",
+    priority: "High",
+    description: "",
+  });
 
-  const handleInputChange = e => {
-    const {name, value} = e.target;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setProjectForm({
       ...projectForm,
-      [name]: value
-    })
+      [name]: value,
+    });
   };
 
   const handleSubmit = async () => {
-    console.log(projectForm)
-  }
+    console.log(projectForm);
+    const data = await API.addProject(projectForm);
+    setUserData(data);
+    handleClose()
+  };
   return (
     <div>
       <Modal onHide={handleClose} show={show}>
@@ -29,7 +30,11 @@ const AddProjectModal = ({ show, handleClose }) => {
           <Modal.Title>Add Project:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form values={projectForm} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />
+          <Form
+            values={projectForm}
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
