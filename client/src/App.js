@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Router, Switch, Route } from "react-router-dom";
 import Profile from "./components/Home/components/Profile/Profile";
 import Projects from './components/Projects/Projects';
-import SingleProject from './components/Projects/SingleProject';
+import SingleProject from './components/SingleProject/SingleProject';
 import Loading from "./components/Loading/Loading";
 import Layout from "./components/Layout/Layout";
 function App() {

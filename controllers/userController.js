@@ -134,7 +134,11 @@ module.exports = {
           }
         )
           .then((data) => {
-            res.json(data);
+            db.User.find({ email: mongoUser[0].email })
+              .populate("issues")
+              .then((data) => {
+                res.json(data);
+              })
           })
           .catch((err) => res.status(422).json(err));
       } else {
@@ -164,7 +168,11 @@ module.exports = {
           }
         )
           .then((data) => {
-            res.json(data);
+            db.User.find({ email: mongoUser[0].email })
+            .populate("issues")
+            .then((data) => {
+              res.json(data);
+            })
           })
           .catch((err) => res.status(422).json(err));
       } else {
