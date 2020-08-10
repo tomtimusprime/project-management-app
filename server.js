@@ -19,17 +19,20 @@ if (process.env.NODE_ENV === "production") {
 app.use(cookieParser());
 app.use(routes);
 
-
 // Connect to the Mongo DB
 
 // mongoose.connect(process.env.MONGO_URL,{useNewUrlParser: true, useUnifiedTopology: true});
-const db = mongoose.connect('mongodb://localhost:27017/userdb', {useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connect(
+  process.env.MONGO_URL || "mongodb://localhost:27017/userdb",
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
 
-  const startServer = async () => {
-  
-    app.listen(PORT, () => {
-      // eslint-disable-next-line no-console
-      console.log(`==> 🌎  Listening on port ${PORT}. Visit http://localhost:3000/ in your browser.`);
-    });
-  };
+const startServer = async () => {
+  app.listen(PORT, () => {
+    // eslint-disable-next-line no-console
+    console.log(
+      `==> 🌎  Listening on port ${PORT}. Visit http://localhost:3000/ in your browser.`
+    );
+  });
+};
 startServer();

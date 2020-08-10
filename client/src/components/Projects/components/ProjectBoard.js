@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import ProjectCard from "./ProjectCard/ProjectCard";
+import {Router} from 'react-router-dom'
 const CustCard = styled(Card)`
   height: 35rem;
 `;
@@ -11,14 +12,14 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div``;
-const ProjectBoard = ({ projects, setUserData }) => {
+const ProjectBoard = ({ projects, setUserData, boardName }) => {
   return (
     <CustCard>
       <Card.Body className="w-100">
         <Row>
           <Col>
             <CardHeader className="p-sm-2">
-              <h1 className="text-center">hi</h1>
+              <h3 className="text-center">{boardName}</h3>
             </CardHeader>
           </Col>
         </Row>
