@@ -2,15 +2,18 @@ import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import ProjectCard from "./ProjectCard/ProjectCard";
-const CustCard = styled(Card)`
-  height: 35rem;
-`;
+
 
 const CardHeader = styled.div`
   border-bottom: 1px solid var(--light-grey-sec);
 `;
 
-const ProjectBoard = ({ projects, setUserData, boardName }) => {
+const ProjectBoard = ({ projects, setUserData, boardName, bg }) => {
+  const CustCard = styled(Card)`
+  min-height: 350px ;
+  background-color: ${bg};
+  border: 2px solid ${bg};
+`;
   return (
     <CustCard>
       <Card.Body className="w-100">

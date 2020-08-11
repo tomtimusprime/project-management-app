@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Jumbotron, Row, Col, Container } from "react-bootstrap";
@@ -9,13 +9,14 @@ import styled from "styled-components";
 import GuestImg from "../../../../assets/images/guest-avatar.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
 import Modal from "../../../Modal/Modal.js";
+
 const ProfileImg = styled.img`
   height: 100px;
   width: 125px;
 `;
 
 const CustomJumbotron = styled.div`
-  background-color: var(--dark-grey-main);
+  background-color: var(--blue-main);
   border-top-left-radius: 0;
   padding: 4rem 2rem;
 
@@ -26,86 +27,74 @@ const CustomJumbotron = styled.div`
 
 const Profile = (props) => {
   const { user, isAuthenticated } = useAuth0();
-  const params = { email: user.email };
-
-  const loadUsers = () => {
-    axios
-      .get("/api/user")
-      .then((res) => {
-        const savedUsers = res.data;
-        checkDuplicate(params, savedUsers);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const saveUser = (newUser) => {
-    return axios.post("/api/user", newUser);
-  };
-
-  const checkDuplicate = (newUser, userList) => {
-    for (let i = 0; i < userList.length; i++) {
-      if (userList[i].email === newUser.email) {
-        return;
-      }
-    }
-    saveUser(newUser);
-  };
+  const [userData, setUserData] = useState({});
   let start = async () => {
-    let p = await axios.post("/cookie",user);
-      console.log(p)
-    // let p =  await axios.get("/api/user");
-    // console.log(p);
-    // let c = await axios.get("/api/user/issues")
-    // console.log(c);
-    // let d = await axios.post("/api/user/issues",{issueName: "issue",projectName: "name of project"})
-    // console.log(d)
-    // let t = "New Project"
-    // let z = await axios.put("/api/user/projects/inProgress/"+t,{inProgress:true})
-    // console.log(z);
-    
-    // let zq = await axios.put("/api/user/issues/5f2f5792aecb371754edca87", {
-    //     issueId: "5f2f58be015c5f493451aef4",
-    //     completed: true
-    // });
-    // console.log(zq);
-    // let e = await axios.put("/api/user/projects",
-    // {id:"5f2f441a7db667482cdb7042"})
-    // console.log(e);
-      // let e = await axios.delete("/api/user")
-      // console.log(e);
+    await axios.post("/cookie", user);
   };
 
+  const getTotalIssues = user => {
+    if (user.projects) {
+      let total = 0;
+
+      user.projects.forEach(project => {
+        total += project.issues.length
+      })
+
+      return total;
+    }
+  }
+
+  const getTotalCompletedIssues = user => {
+    if (user.projects) {
+      const completed = [];
+      user.projects.forEach(proj => proj.issues.forEach(issue => { if (issue.completed === true) { completed.push(issue) } }))
+      console.log(completed)
+      return completed.length;
+    }
+  };
+
+  const totalCompletedIssues = getTotalCompletedIssues(userData);
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      const { data } = await axios.get(`/api/user`);
+      console.log(data)
+      setUserData(data[0])
+      getTotalIssues(data[0])
+    };
+    fetchUserData();
     if (isAuthenticated) {
       start();
     }
   }, []);
 
+  const totalIssues = getTotalIssues(userData);
+
   return (
     <>
       <CustomJumbotron>
-        <Row>
-          <Col>
-            <h1 className="header">Welcome back!</h1>
-            <h1 className="header">User Name</h1>
-          </Col>
-          <Col>
-            <ProfileCard
-              name={"Tom"}
-              title={"Software Engineer"}
-              about={"Based in AZ"}
-            />
-          </Col>
-        </Row>
+        <Container>
+          <Row>
+            <Col>
+              <h1 className="header">Welcome back!</h1>
+              <h1 className="header">{user.name}</h1>
+            </Col>
+            <Col>
+              <ProfileCard
+                name={user.name}
+                email={user.email}
+              />
+            </Col>
+          </Row>
+        </Container>
       </CustomJumbotron>
       <Container>
         <Row className="py-5">
           <Col>
-            <WorkCard />
+            <WorkCard projects={userData.projects ? userData.projects.length : ''} issues={totalIssues} />
           </Col>
           <Col>
-            <HistoryCard />
+            <HistoryCard issues={totalCompletedIssues} />
           </Col>
         </Row>
         <br></br>

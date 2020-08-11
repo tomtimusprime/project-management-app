@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const CustCard = styled.div`
+background-color: #3283b867;
+color: white;
 width: auto;
 height: 450px;
 padding: 2rem;
