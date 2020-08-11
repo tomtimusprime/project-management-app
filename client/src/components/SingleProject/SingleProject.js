@@ -94,22 +94,22 @@ const SingleProject = () => {
         <Row className='py-5'>
           <Col md={6}><Row >
             <Col md={12}>
-              <Card
+              <CustCard
                 style={{
                   width: "100%",
-                  textAlign: "initial",
+                  alignItems: "flex-starCustt",
                   height: "auto",
                 }}
               >
-                <Card.Body>
                   <Card.Title>Description:</Card.Title>
+                <Card.Body>
                   <Card.Text>
                     {data.description
                       ? data.description
                       : "You should leave meaningful descriptions for your projects!"}
                   </Card.Text>
                 </Card.Body>
-              </Card>
+              </CustCard>
             </Col>
           </Row>
           </Col>
