@@ -68,8 +68,13 @@ const Profile = (props) => {
     //     completed: true
     // });
     // console.log(zq);
-
+    // let e = await axios.put("/api/user/projects",
+    // {id:"5f2f441a7db667482cdb7042"})
+    // console.log(e);
+      // let e = await axios.delete("/api/user")
+      // console.log(e);
   };
+
 
   useEffect(() => {
     if (isAuthenticated) {
