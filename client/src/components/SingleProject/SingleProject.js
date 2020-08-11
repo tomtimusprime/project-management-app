@@ -114,7 +114,6 @@ const SingleProject = (props) => {
                     )}
                   </Card.Body>
                 </CustCard>
-                <h2>Current Issues:</h2>
               </Col>
             </Row>
 
