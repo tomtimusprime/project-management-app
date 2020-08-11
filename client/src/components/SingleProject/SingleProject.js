@@ -5,6 +5,7 @@ import { Row, Col, Container, Button, Card } from "react-bootstrap";
 import IssueCard from "./components/IssueCard/IssueCard";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import { CustCard } from './utils/elements.js';
+import styled from 'styled-components'
 const SingleProject = (props) => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -30,8 +31,17 @@ const SingleProject = (props) => {
     };
     fetchData();
   }, []);
-  console.log(data);
+
   const date = new Date(data.Date).toLocaleDateString();
+  if (data.issues) {
+    console.log(data.issues.length)
+  }
+  const NoIssues = styled.p`
+    font-size: 1.25rem;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+  `
   return (
     <>
       {console.log()}
@@ -72,10 +82,9 @@ const SingleProject = (props) => {
           show={show}
           handleClose={handleClose}
         />
-        <Row>
-          <Col xs={6}><Row className='py-3'>
+        <Row className='py-5'>
+          <Col md={6}><Row >
             <Col md={12}>
-
               <Card
                 style={{
                   width: "100%",
@@ -95,17 +104,22 @@ const SingleProject = (props) => {
             </Col>
           </Row>
           </Col>
-          <Col xs={6}>
+          <Col md={6}>
             <Row>
               <Col xs={12}>
                 <CustCard>
                   <Card.Title>Current Issues:</Card.Title>
-                  <Card.Body>
+                  <Card.Body className=''>
+                    {data.issues && data.issues.length === 0 && (
+                      <div className='d-flex justify-content-center'>
+                        <NoIssues>You should add your first issue!</NoIssues>
+                      </div>
+                    )}
                     {data.issues && (
                       <>
                         {data.issues.map((i) => (
                           <Row className="mb-3">
-                            <Col xs={12}>
+                            <Col className='w-100' xs={12}>
                               <IssueCard issue={i} />
                             </Col>
                           </Row>
