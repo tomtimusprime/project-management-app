@@ -181,4 +181,56 @@ module.exports = {
       }
     })(req, res, next);
   },
+
+  removeProject: function (req, res, next) {
+    passport.authenticate("jwt", async function (err, mongoUser, info) {
+      if (mongoUser) {
+        console.log("Access granted for user with JWT");
+        console.log(req.body);
+        db.User.update(
+          {
+            email: mongoUser[0].email,
+          },
+          {
+            $pull: { projects: {_id: mongoose.Types.ObjectId(req.body.id)} },
+          }
+        )
+          .then((data) => {
+            db.User.find({ email: mongoUser[0].email })
+            .populate("issues")
+            .then((data) => {
+              res.json(data);
+            })
+          })
+          .catch((err) => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT");
+        res.json({ loggedIn: false });
+      }
+    })(req, res, next);
+  },
+  removeUser: function (req, res, next) {
+    passport.authenticate("jwt", async function (err, mongoUser, info) {
+      if (mongoUser) {
+        console.log("Access granted for user with JWT");
+        console.log(req.body);
+        db.User.remove(
+          {
+            email: mongoUser[0].email
+          }
+        )
+          .then((data) => {
+            db.User.find({ email: mongoUser[0].email })
+            .populate("issues")
+            .then((data) => {
+              res.json(data);
+            })
+          })
+          .catch((err) => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT");
+        res.json({ loggedIn: false });
+      }
+    })(req, res, next);
+  }
 };
