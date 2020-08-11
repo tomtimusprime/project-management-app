@@ -43,23 +43,26 @@ const Projects = () => {
     {
       name: "Upcoming",
       projects: upcoming,
+      bg: 'rgba(81, 234, 255, 0.5)'
     },
     {
       name: "In Progress",
       projects: inProgressProjs,
+      bg: 'rgba(234, 255, 81, 0.7)'
     },
     {
       name: "Completed",
       projects: completed,
+      bg: 'rgba(81, 255, 101, 0.6)'
     },
   ];
 
   return (
     <div>
       <Container>
-        <Row>
+        <Row className='pt-5'>
           <Col>
-            <h1 className="text-center py-3">Projects</h1>
+            <h1 style={{color: 'white'}} className="text-center py-3">Projects</h1>
             <Button
               disabled={!isAuthenticated}
               onClick={() => {
@@ -71,10 +74,11 @@ const Projects = () => {
             </Button>
           </Col>
         </Row>
-        <Row>
+        <Row className='pb-5'>
           {projectBoards.map((i, ind) => (
             <Col key={ind} md={4}>
               <ProjectBoard
+                bg={i.bg}
                 key={i.name}
                 setUserData={setUserData}
                 projects={i.projects}

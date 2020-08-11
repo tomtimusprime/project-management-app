@@ -48,9 +48,8 @@ const SingleProject = () => {
   `
   return (
     <>
-      {console.log()}
       <Container>
-        <Row className="pt-5 pb-3">
+        <Row style={{ color: 'white' }} className="pt-5 pb-3">
           <Col xs={12}>
             <Row className="pb-1">
               <Col>
@@ -81,10 +80,10 @@ const SingleProject = () => {
           </Col>
         </Row>
         <DeleteModal
-        name={data.projectName} 
-        projectId={id} 
-        show={deleteModalShow} 
-        handleClose={() => { setDeleteModalShow(false) }} />
+          name={data.projectName}
+          projectId={id}
+          show={deleteModalShow}
+          handleClose={() => { setDeleteModalShow(false) }} />
         <AddIssueModal
           setUserData={setProjectData}
           projectId={id}
@@ -101,7 +100,7 @@ const SingleProject = () => {
                   height: "auto",
                 }}
               >
-                  <Card.Title>Description:</Card.Title>
+                <Card.Title>Description:</Card.Title>
                 <Card.Body>
                   <Card.Text>
                     {data.description

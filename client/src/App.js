@@ -10,7 +10,6 @@ import Loading from "./components/Loading/Loading";
 import Layout from "./components/Layout/Layout";
 function App() {
   const { isLoading } = useAuth0();
-
   if (isLoading) {
     return <Loading />;
   }
