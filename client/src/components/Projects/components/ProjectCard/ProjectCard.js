@@ -24,16 +24,21 @@ const ProjectCard = ({
   const handleMove = async (e) => {
     const { id } = e.target.dataset;
     if (inProgress) {
-      const data = await API.setProjectStatus(id, "completed", true);
-      setUserData(data.data[0]);
+      const { data } = await API.setProjectStatus(id, "completed", true);
+      setUserData(data[0]);
     }
     if (!inProgress && !completed) {
-      const data = await API.setProjectStatus(id, "inProgress", true);
-      setUserData(data.data[0]);
+      const { data } = await API.setProjectStatus(id, "inProgress", true);
+      setUserData(data[0]);
     }
   };
 
-  const handleDelete = async (e) => {};
+  const handleDelete = async (e) => {
+    console.log(e.target.dataset.id)
+    const { data } = await API.deleteProject(e.target.dataset.id);
+    console.log(data)
+    setUserData(data)
+  };
   const date = new Date(createdAt).toLocaleDateString();
   return (
     <Row className="d-flex align-items-center py-2">
@@ -58,10 +63,10 @@ const ProjectCard = ({
             Delete
           </MoveButton>
         ) : (
-          <MoveButton data-id={id} onClick={handleMove}>
-            Move
-          </MoveButton>
-        )}
+            <MoveButton data-id={id} onClick={handleMove}>
+              Move
+            </MoveButton>
+          )}
       </Col>
     </Row>
   );

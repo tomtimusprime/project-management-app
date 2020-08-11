@@ -5,12 +5,14 @@ import { Row, Col, Container, Button, Card } from "react-bootstrap";
 import IssueCard from "./components/IssueCard/IssueCard";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import { CustCard } from './utils/elements.js';
-import styled from 'styled-components'
-const SingleProject = (props) => {
+import styled from 'styled-components';
+import DeleteModal from './components/DeleteModal/DeleteModal'
+const SingleProject = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [show, setShow] = useState(false);
-  const [openIssues, setOpenIssues] = useState([])
+  const [openIssues, setOpenIssues] = useState([]);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -18,7 +20,6 @@ const SingleProject = (props) => {
   const handleShow = () => {
     setShow(true);
   };
-
   const setProjectData = (user) => {
     console.log(user);
     if (user[0].projects !== undefined) {
@@ -72,13 +73,18 @@ const SingleProject = (props) => {
                 </Button>
               </Col>
               <Col xs={"auto"}>
-                <Button data-id={data.id} variant="danger">
+                <Button onClick={() => { setDeleteModalShow(true) }} data-id={data.id} variant="danger">
                   Delete Project
                 </Button>
               </Col>
             </Row>
           </Col>
         </Row>
+        <DeleteModal
+        name={data.projectName} 
+        projectId={id} 
+        show={deleteModalShow} 
+        handleClose={() => { setDeleteModalShow(false) }} />
         <AddIssueModal
           setUserData={setProjectData}
           projectId={id}
@@ -113,9 +119,9 @@ const SingleProject = (props) => {
                 <CustCard>
                   <Card.Title>Current Issues:</Card.Title>
                   <Card.Body className=''>
-                    {data.issues && data.issues.length === 0 && (
+                    {data.issues && openIssues.length === 0 && (
                       <div className='d-flex justify-content-center'>
-                        <NoIssues>You should add your first issue!</NoIssues>
+                        <NoIssues>No open issues! Woo!</NoIssues>
                       </div>
                     )}
                     {data.issues && (
