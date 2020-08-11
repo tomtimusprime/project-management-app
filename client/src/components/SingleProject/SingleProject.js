@@ -10,6 +10,7 @@ const SingleProject = (props) => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [show, setShow] = useState(false);
+  const [openIssues, setOpenIssues] = useState([])
 
   const handleClose = () => {
     setShow(false);
@@ -20,8 +21,12 @@ const SingleProject = (props) => {
 
   const setProjectData = (user) => {
     console.log(user);
-    const project = user[0].projects.filter((i) => i._id === id);
-    setData(project[0]);
+    if (user[0].projects !== undefined) {
+      const project = user[0].projects.filter((i) => i._id === id);
+      setData(project[0]);
+      const openIssues = project[0].issues.filter(i => i.completed === false);
+      setOpenIssues(openIssues)
+    }
   };
 
   useEffect(() => {
@@ -33,9 +38,7 @@ const SingleProject = (props) => {
   }, []);
 
   const date = new Date(data.Date).toLocaleDateString();
-  if (data.issues) {
-    console.log(data.issues.length)
-  }
+
   const NoIssues = styled.p`
     font-size: 1.25rem;
     position: absolute;
@@ -117,10 +120,10 @@ const SingleProject = (props) => {
                     )}
                     {data.issues && (
                       <>
-                        {data.issues.map((i) => (
+                        {openIssues.map((i) => (
                           <Row className="mb-3">
                             <Col className='w-100' xs={12}>
-                              <IssueCard issue={i} />
+                              <IssueCard projectId={id} setProjectData={setProjectData} issue={i} />
                             </Col>
                           </Row>
                         ))}
