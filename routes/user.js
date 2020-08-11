@@ -5,11 +5,13 @@ const userController = require("../controllers/userController");
 router
     .route("/api/user")
     .get(userController.findUser)
-    .post(userController.createUser);
+    .post(userController.createUser)
+    .delete(userController.removeUser)
 
 router
     .route("/api/user/projects")
     .post(userController.addProject)
+    .put(userController.removeProject);
 
 router
     .route("/api/user/projects/inProgress/:id")
