@@ -10,11 +10,7 @@ export const API = {
     return data;
   },
   deleteProject: async id => {
-    const data = await axios.delete('/api/projects/:id')
-    return data;
-  },
-  deleteIssue: async id => {
-    const data = await axios.delete('/api/projects/issues/:id')
+    const data = await axios.put('/api/user/projects', {id: id})
     return data;
   },
   addProject: async proj => {
