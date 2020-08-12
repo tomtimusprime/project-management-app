@@ -4,9 +4,9 @@ import axios from "axios";
 import { Row, Col, Container, Button, Card } from "react-bootstrap";
 import IssueCard from "./components/IssueCard/IssueCard";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
-import { CustCard } from './utils/elements.js';
-import styled from 'styled-components';
-import DeleteModal from './components/DeleteModal/DeleteModal'
+import { CustCard } from "./utils/elements.js";
+import styled from "styled-components";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 const SingleProject = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -25,8 +25,8 @@ const SingleProject = () => {
     if (user[0].projects !== undefined) {
       const project = user[0].projects.filter((i) => i._id === id);
       setData(project[0]);
-      const openIssues = project[0].issues.filter(i => i.completed === false);
-      setOpenIssues(openIssues)
+      const openIssues = project[0].issues.filter((i) => i.completed === false);
+      setOpenIssues(openIssues);
     }
   };
 
@@ -45,11 +45,11 @@ const SingleProject = () => {
     position: absolute;
     top: 50%;
     text-align: center;
-  `
+  `;
   return (
     <>
       <Container>
-        <Row style={{ color: 'white' }} className="pt-5 pb-3">
+        <Row style={{ color: "white" }} className="pt-5 pb-3">
           <Col xs={12}>
             <Row className="pb-1">
               <Col>
@@ -72,7 +72,13 @@ const SingleProject = () => {
                 </Button>
               </Col>
               <Col xs={"auto"}>
-                <Button onClick={() => { setDeleteModalShow(true) }} data-id={data.id} variant="danger">
+                <Button
+                  onClick={() => {
+                    setDeleteModalShow(true);
+                  }}
+                  data-id={data.id}
+                  variant="danger"
+                >
                   Delete Project
                 </Button>
               </Col>
@@ -83,43 +89,47 @@ const SingleProject = () => {
           name={data.projectName}
           projectId={id}
           show={deleteModalShow}
-          handleClose={() => { setDeleteModalShow(false) }} />
+          handleClose={() => {
+            setDeleteModalShow(false);
+          }}
+        />
         <AddIssueModal
           setUserData={setProjectData}
           projectId={id}
           show={show}
           handleClose={handleClose}
         />
-        <Row className='py-5'>
-          <Col md={6}><Row >
-            <Col md={12}>
-              <CustCard
-                style={{
-                  width: "100%",
-                  alignItems: "flex-starCustt",
-                  height: "auto",
-                }}
-              >
-                <Card.Title>Description:</Card.Title>
-                <Card.Body>
-                  <Card.Text>
-                    {data.description
-                      ? data.description
-                      : "You should leave meaningful descriptions for your projects!"}
-                  </Card.Text>
-                </Card.Body>
-              </CustCard>
-            </Col>
-          </Row>
+        <Row className="py-5">
+          <Col md={6}>
+            <Row>
+              <Col md={12}>
+                <CustCard
+                  style={{
+                    width: "100%",
+                    alignItems: "flex-starCustt",
+                    height: "auto",
+                  }}
+                >
+                  <Card.Title>Description:</Card.Title>
+                  <Card.Body>
+                    <Card.Text>
+                      {data.description
+                        ? data.description
+                        : "You should leave meaningful descriptions for your projects!"}
+                    </Card.Text>
+                  </Card.Body>
+                </CustCard>
+              </Col>
+            </Row>
           </Col>
           <Col md={6}>
             <Row>
               <Col xs={12}>
                 <CustCard>
                   <Card.Title>Current Issues:</Card.Title>
-                  <Card.Body className=''>
+                  <Card.Body className="">
                     {data.issues && openIssues.length === 0 && (
-                      <div className='d-flex justify-content-center'>
+                      <div className="d-flex justify-content-center">
                         <NoIssues>No open issues! Woo!</NoIssues>
                       </div>
                     )}
@@ -127,8 +137,12 @@ const SingleProject = () => {
                       <>
                         {openIssues.map((i) => (
                           <Row className="mb-3">
-                            <Col className='w-100' xs={12}>
-                              <IssueCard projectId={id} setProjectData={setProjectData} issue={i} />
+                            <Col className="w-100" xs={12}>
+                              <IssueCard
+                                projectId={id}
+                                setProjectData={setProjectData}
+                                issue={i}
+                              />
                             </Col>
                           </Row>
                         ))}
@@ -138,10 +152,8 @@ const SingleProject = () => {
                 </CustCard>
               </Col>
             </Row>
-
           </Col>
         </Row>
-
       </Container>
     </>
   );
@@ -149,7 +161,8 @@ const SingleProject = () => {
 
 export default SingleProject;
 
-{/* <Row>
+{
+  /* <Row>
 <Col md={12}>
   
     </Col>
@@ -160,4 +173,5 @@ export default SingleProject;
   </Row>
 </Col>
 
-</Row> */}
+</Row> */
+}
