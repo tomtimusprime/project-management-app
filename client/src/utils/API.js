@@ -2,33 +2,65 @@ import axios from "axios";
 
 export const API = {
   addIssue: async (id, issue) => {
-    const data = await axios.post("/api/user/issues/" + id, issue);
-    return data;
+    try {
+      const data = await axios.post("/api/user/issues/" + id, issue);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   setProjectStatus: async (id, field, status) => {
-    const data = await axios.post("/api/user/projects/inProgress/" + id, {
-      field: field,
-      status: status,
-    });
-    return data;
+    try {
+      const data = await axios.post("/api/user/projects/inProgress/" + id, {
+        field: field,
+        status: status,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   deleteProject: async (id) => {
-    const data = await axios.put("/api/user/projects", { id: id });
-    return data;
+    try {
+      const data = await axios.put("/api/user/projects", { id: id });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   addProject: async (proj) => {
-    const data = await axios.post("/api/user/projects", proj);
-    return data;
+    try {
+      const data = await axios.post("/api/user/projects", proj);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   getUser: async () => {
-    const data = await axios.get("/api/user");
-    return data;
+    try {
+      const data = await axios.get("/api/user");
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   completeIssue: async (projectId, issueId) => {
-    const data = await axios.put("/api/user/issues/" + projectId, {
-      completed: true,
-      issueId: issueId,
-    });
-    return data;
+    try {
+      const data = await axios.put("/api/user/issues/" + projectId, {
+        completed: true,
+        issueId: issueId,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   },
+  deleteCookie: async () => {
+    try {
+      const data = await axios.get('/cookie')
+      return data;
+    } catch (error) {
+      console.error(error)
+    }
+  }
 };

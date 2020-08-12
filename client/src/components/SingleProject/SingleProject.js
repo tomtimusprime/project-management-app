@@ -7,9 +7,8 @@ import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import { CustCard } from "./utils/elements.js";
 import styled from "styled-components";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
-import {withAuthenticationRequired} from '@auth0/auth0-react';
-import Loading from '../Loading/Loading'
-
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Loading from "../Loading/Loading";
 
 const SingleProject = () => {
   const { id } = useParams();
@@ -36,8 +35,12 @@ const SingleProject = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/user");
-      setProjectData(data);
+      try {
+        const { data } = await axios.get("/api/user");
+        setProjectData(data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchData();
   }, []);
@@ -164,6 +167,3 @@ const SingleProject = () => {
 };
 
 export default SingleProject;
-
-
-
