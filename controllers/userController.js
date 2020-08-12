@@ -12,7 +12,6 @@ module.exports = {
         db.User.create({ email: monogoUser[0].email })
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email })
-              .populate("issues")
               .then((data) => {
                 res.json(data);
               });
@@ -30,7 +29,6 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT");
         db.User.find({ email: mongoUser[0].email })
-          .populate("issues")
           .then((dbModel) => res.json(dbModel))
           .catch((err) => res.status(422).json(err));
       } else {
@@ -51,7 +49,6 @@ module.exports = {
         )
           .then((dbModel) => {
             db.User.find({ email: mongoUser[0].email })
-              .populate("issues")
               .then((data) => {
                 res.json(data);
               });
@@ -102,7 +99,6 @@ module.exports = {
             }
           ).then(
             db.User.find({ email: mongoUser[0].email })
-              .populate("issues")
               .then((data) => {
                 res.json(data);
               })
@@ -135,7 +131,6 @@ module.exports = {
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-              .populate("issues")
               .then((data) => {
                 res.json(data);
               })
@@ -169,7 +164,6 @@ module.exports = {
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
             .then((data) => {
               res.json(data);
             })
@@ -197,7 +191,6 @@ module.exports = {
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
             .then((data) => {
               res.json(data);
             })
@@ -221,7 +214,6 @@ module.exports = {
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
             .then((data) => {
               res.json(data);
             })
