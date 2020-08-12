@@ -4,7 +4,7 @@
     "description": "Project-3 Auth template",
     "main": "server.js",
     "scripts": {
-        "start": "if-env NODE_ENV=production && set NODE_ENV=prod &&  npm run start:prod || set NODE_ENV=dev && npm run start:dev",
+        "start": "if-env NODE_ENV=production &&  npm run start:prod || set NODE_ENV=dev && npm run start:dev",
         "start:prod": "node server.js",
         "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
         "client": "cd client && npm run start",
