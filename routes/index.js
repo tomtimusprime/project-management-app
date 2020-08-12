@@ -9,7 +9,7 @@ router.use((req, res) => {
     case 'dev':
     res.sendFile(path.join(__dirname, '../client/public/index.html'))
       break;
-    case 'prod':
+    case 'production':
       res.sendFile(path.join(__dirname, "../client/build/index.html"));
     default:
       break;
