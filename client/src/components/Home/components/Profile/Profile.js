@@ -35,43 +35,46 @@ const Profile = (props) => {
     await axios.post("/cookie", user);
   };
 
-  const getTotalIssues = user => {
-    if (user !== null) {
+  const getTotalIssues = (user) => {
+    if (isAuthenticated) {
       let total = 0;
 
-      user.projects.forEach(project => {
-        total += project.issues.length
-      })
+      user.projects.forEach((project) => {
+        total += project.issues.length;
+      });
 
-      setTotalIssues(total)
+      setTotalIssues(total);
     }
-  }
+  };
 
-  const getTotalCompletedIssues = user => {
-    if (user !== null) {
+  const getTotalCompletedIssues = (user) => {
+    if (isAuthenticated) {
       const completed = [];
-      user.projects.forEach(proj => proj.issues.forEach(issue => { if (issue.completed === true) { completed.push(issue) } }))
-      console.log(completed)
+      user.projects.forEach((proj) =>
+        proj.issues.forEach((issue) => {
+          if (issue.completed === true) {
+            completed.push(issue);
+          }
+        })
+      );
+      console.log(completed);
       setCompletedIssues(completed.length);
     }
   };
 
-
   useEffect(() => {
-    const fetchUserData = async () => {
-      const { data } = await axios.get(`/api/user`);
-      console.log(data)
-      getTotalIssues(data[0])
-      getTotalCompletedIssues(data[0]);
-
-    };
-    fetchUserData();
-
     if (isAuthenticated) {
       start();
+      const fetchUserData = async () => {
+        const { data } = await axios.get(`/api/user`);
+        console.log(data);
+        getTotalIssues(data[0]);
+        getTotalCompletedIssues(data[0]);
+        setTotalProjects(data[0].projects.length);
+      };
+      fetchUserData();
     }
   }, []);
-
 
   return (
     <>
@@ -83,20 +86,17 @@ const Profile = (props) => {
               <h1 className="header">{user.name}</h1>
             </Col>
             <Col>
-              <ProfileCard
-                name={user.name}
-                email={user.email}
-              />
+              <ProfileCard name={user.name} email={user.email} />
             </Col>
           </Row>
         </Container>
       </CustomJumbotron>
       <Container>
         <Row className="py-5">
-          <Col md={6} className='py-5 py-md-0'>
+          <Col md={6} className="py-5 py-md-0">
             <WorkCard projects={totalProjects} issues={totalIssues} />
           </Col>
-          <Col md={6} className='py-5 py-md-0'>
+          <Col md={6} className="py-5 py-md-0">
             <HistoryCard issues={completedIssues} />
           </Col>
         </Row>

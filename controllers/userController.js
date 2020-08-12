@@ -39,7 +39,7 @@ module.exports = {
       }
     })(req, res, next);
   },
- 
+
   //Add Project to User
   addProject: function (req, res, next) {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
@@ -138,7 +138,7 @@ module.exports = {
               .populate("issues")
               .then((data) => {
                 res.json(data);
-              })
+              });
           })
           .catch((err) => res.status(422).json(err));
       } else {
@@ -169,10 +169,10 @@ module.exports = {
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
-            .then((data) => {
-              res.json(data);
-            })
+              .populate("issues")
+              .then((data) => {
+                res.json(data);
+              });
           })
           .catch((err) => res.status(422).json(err));
       } else {
@@ -192,15 +192,15 @@ module.exports = {
             email: mongoUser[0].email,
           },
           {
-            $pull: { projects: {_id: mongoose.Types.ObjectId(req.body.id)} },
+            $pull: { projects: { _id: mongoose.Types.ObjectId(req.body.id) } },
           }
         )
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
-            .then((data) => {
-              res.json(data);
-            })
+              .populate("issues")
+              .then((data) => {
+                res.json(data);
+              });
           })
           .catch((err) => res.status(422).json(err));
       } else {
@@ -214,17 +214,15 @@ module.exports = {
       if (mongoUser) {
         console.log("Access granted for user with JWT");
         console.log(req.body);
-        db.User.remove(
-          {
-            email: mongoUser[0].email
-          }
-        )
+        db.User.remove({
+          email: mongoUser[0].email,
+        })
           .then((data) => {
             db.User.find({ email: mongoUser[0].email })
-            .populate("issues")
-            .then((data) => {
-              res.json(data);
-            })
+              .populate("issues")
+              .then((data) => {
+                res.json(data);
+              });
           })
           .catch((err) => res.status(422).json(err));
       } else {
@@ -232,5 +230,5 @@ module.exports = {
         res.json({ loggedIn: false });
       }
     })(req, res, next);
-  }
+  },
 };
