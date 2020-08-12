@@ -27,48 +27,51 @@ const CustomJumbotron = styled.div`
 
 const Profile = (props) => {
   const { user, isAuthenticated } = useAuth0();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
+  const [totalIssues, setTotalIssues] = useState(0);
+  const [completedIssues, setCompletedIssues] = useState(0);
+  const [totalProjects, setTotalProjects] = useState(0);
   let start = async () => {
     await axios.post("/cookie", user);
   };
 
   const getTotalIssues = user => {
-    if (user.projects) {
+    if (user !== null) {
       let total = 0;
 
       user.projects.forEach(project => {
         total += project.issues.length
       })
 
-      return total;
+      setTotalIssues(total)
     }
   }
 
   const getTotalCompletedIssues = user => {
-    if (user.projects) {
+    if (user !== null) {
       const completed = [];
       user.projects.forEach(proj => proj.issues.forEach(issue => { if (issue.completed === true) { completed.push(issue) } }))
       console.log(completed)
-      return completed.length;
+      setCompletedIssues(completed.length);
     }
   };
 
-  const totalCompletedIssues = getTotalCompletedIssues(userData);
 
   useEffect(() => {
     const fetchUserData = async () => {
       const { data } = await axios.get(`/api/user`);
       console.log(data)
-      setUserData(data[0])
       getTotalIssues(data[0])
+      getTotalCompletedIssues(data[0]);
+
     };
     fetchUserData();
+
     if (isAuthenticated) {
       start();
     }
   }, []);
 
-  const totalIssues = getTotalIssues(userData);
 
   return (
     <>
@@ -91,10 +94,10 @@ const Profile = (props) => {
       <Container>
         <Row className="py-5">
           <Col>
-            <WorkCard projects={userData.projects ? userData.projects.length : ''} issues={totalIssues} />
+            <WorkCard projects={totalProjects} issues={totalIssues} />
           </Col>
           <Col>
-            <HistoryCard issues={totalCompletedIssues} />
+            <HistoryCard issues={completedIssues} />
           </Col>
         </Row>
         <br></br>
