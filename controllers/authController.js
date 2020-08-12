@@ -15,10 +15,10 @@ module.exports = {
         }
         console.log(req.body)
         db.User
-            .find({email:req.body.email}).populate("issues")
+            .find({email:req.body.email})
             .then((dbUser) => {
                 if(dbUser.length === 0){
-                    db.User.create({email:req.body.email, projects:{projectName:"New Project"}})
+                    db.User.create({email:req.body.email})
                     .then((dbUser)=>{
                         console.log(dbUser);
                         res.json(dbUser);
