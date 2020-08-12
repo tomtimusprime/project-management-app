@@ -3,12 +3,10 @@ import { Navbar, Nav } from "react-bootstrap";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Link, Router} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-const NavBar = () => {
-    const { isAuthenticated } = useAuth0();
 
-    const StyledLink = styled(Link)`
+const StyledLink = styled(Link)`
         color: white;
         text-decoration: none;
 
@@ -17,6 +15,11 @@ const NavBar = () => {
             text-decoration: none;
         }
     `
+
+const NavBar = () => {
+    const { isAuthenticated } = useAuth0();
+
+    
     return (
         <Navbar fixed style={{backgroundColor: 'var(--blue-main)'}} >
             <Navbar.Brand style={{color: 'white'}}>Project 3</Navbar.Brand>
