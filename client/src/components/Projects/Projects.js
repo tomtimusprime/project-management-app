@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import ProjectBoard from "./components/ProjectBoard";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import AddProjectModal from "./components/AddProjectModal/AddProjectModal";
 import axios from "axios";
 import Loading from "../Loading/Loading";
+import { motion } from "framer-motion";
+
 const Projects = () => {
   const { isAuthenticated } = useAuth0();
 
@@ -40,7 +42,7 @@ const Projects = () => {
       };
       fetchUserData();
     }
-  }, [userData]);
+  }, [userData, isAuthenticated]);
 
   const projectBoards = [
     {
@@ -82,13 +84,34 @@ const Projects = () => {
         <Row className="pb-5">
           {projectBoards.map((i, ind) => (
             <Col key={ind} md={4}>
-              <ProjectBoard
-                bg={i.bg}
-                key={i.name}
-                setUserData={setUserData}
-                projects={i.projects}
-                boardName={i.name}
-              />
+              <motion.div
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  
+                }}
+                transition={ {
+                  type: "spring",
+                  damping: 9,
+                  duration: 0.3,
+                  delay: ind * .2
+                }}
+
+                initial={
+                  {
+                    opacity: 0,
+                    y: 100
+                  }
+                }
+              >
+                <ProjectBoard
+                  bg={i.bg}
+                  key={i.name}
+                  setUserData={setUserData}
+                  projects={i.projects}
+                  boardName={i.name}
+                />
+              </motion.div>
             </Col>
           ))}
         </Row>

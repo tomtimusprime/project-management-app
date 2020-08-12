@@ -4,7 +4,7 @@ import { API } from '../../../../utils/API';
 
 const DeleteModal = ({ show, handleClose, projectId, name }) => {
     const handleDelete = id => {
-        const { data } = API.deleteProject(id);
+         API.deleteProject(id);
         window.location.href = window.location.origin + '/projects'
     }
     return (

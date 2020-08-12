@@ -1,36 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { Jumbotron, Row, Col, Container } from "react-bootstrap";
-import ProfileCard from "./components/Card/ProfileCard";
-import WorkCard from "./components/Card/WorkCard";
-import HistoryCard from "./components/Card/HistoryCard";
-import styled from "styled-components";
-import GuestImg from "../../../../assets/images/guest-avatar.jpg";
+import { Row, Col, Container } from "react-bootstrap";
+import { CustomJumbotron } from "./utils/elements";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import Modal from "../../../Modal/Modal.js";
 import Loading from "../../../Loading/Loading";
+import Card from "./components/Card/Card";
+import { cards } from "./utils/cards";
 
-const ProfileImg = styled.img`
-  height: 100px;
-  width: 125px;
-`;
-
-const CustomJumbotron = styled.div`
-  background-color: var(--blue-main);
-  border-top-left-radius: 0;
-  padding: 4rem 2rem;
-
-  .header {
-    color: white;
-  }
-`;
-
-const Profile = (props) => {
+const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
-  const [totalIssues, setTotalIssues] = useState(0);
-  const [completedIssues, setCompletedIssues] = useState(0);
-  const [totalProjects, setTotalProjects] = useState(0);
+  const [totalIssues, setTotalIssues] = useState(null);
+  const [completedIssues, setCompletedIssues] = useState(null);
+  const [totalProjects, setTotalProjects] = useState(null);
+
+  const { profile, work, history } = cards;
 
   let start = async () => {
     await axios.post("/cookie", user);
@@ -78,40 +61,49 @@ const Profile = (props) => {
     if (isAuthenticated) {
       start();
     }
-  }, []);
+
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
 
   return (
     <>
-      <CustomJumbotron>
-        <Container>
-          <Row>
-            <Col>
-              <h1 className="header">Welcome back!</h1>
-              <h1 className="header">
-                {isAuthenticated ? user.name : "Guest"}
-              </h1>
-            </Col>
-            <Col>
-              <ProfileCard
-                name={isAuthenticated ? user.name : "Guest"}
-                email={isAuthenticated ? user.email : ""}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </CustomJumbotron>
-      <Container>
-        <Row className="py-5">
-          <Col md={6} className="py-5 py-md-0">
-            <WorkCard projects={totalProjects} issues={totalIssues} />
-          </Col>
-          <Col md={6} className="py-5 py-md-0">
-            <HistoryCard issues={completedIssues} />
-          </Col>
-        </Row>
-        <br></br>
-      </Container>
-    </>
+
+    
+          <CustomJumbotron>
+            <Container>
+              <Row>
+                <Col>
+                  <h1 className="header">Welcome back!</h1>
+                  <h1 className="header">
+                    {isAuthenticated ? user.name : "Guest"}
+                  </h1>
+                </Col>
+                <Col>
+                  <Card
+                    text={profile}
+                    fieldOne={user.name}
+                    fieldTwo={user.email}
+                  />
+                </Col>
+              </Row>
+            </Container>
+          </CustomJumbotron>
+          <Container>
+            <Row className="py-5">
+              <Col md={6} className="py-5 py-md-0">
+                <Card
+                  text={work}
+                  fieldOne={totalProjects}
+                  fieldTwo={totalIssues}
+                />
+              </Col>
+              <Col md={6} className="py-5 py-md-0">
+                <Card text={history} fieldOne={completedIssues} />
+              </Col>
+            </Row>
+            <br></br>
+          </Container>
+        </>
   );
 };
 

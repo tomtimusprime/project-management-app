@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Row, Col, Container, Button, Card } from "react-bootstrap";
-import IssueCard from "./components/IssueCard/IssueCard";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
-import { CustCard } from "./utils/elements.js";
-import styled from "styled-components";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-import Loading from "../Loading/Loading";
-
+import DescriptionCard from "./components/DescriptionCard/DescriptionCard";
+import CurrentIssuesCard from "./components/CurrentIssuesCard/CurrentIssuesCard";
 const SingleProject = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -43,16 +39,11 @@ const SingleProject = () => {
       }
     };
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const date = new Date(data.Date).toLocaleDateString();
 
-  const NoIssues = styled.p`
-    font-size: 1.25rem;
-    position: absolute;
-    top: 50%;
-    text-align: center;
-  `;
   return (
     <>
       <Container>
@@ -110,53 +101,19 @@ const SingleProject = () => {
           <Col md={6}>
             <Row>
               <Col md={12}>
-                <CustCard
-                  style={{
-                    width: "100%",
-                    alignItems: "flex-starCustt",
-                    height: "auto",
-                  }}
-                >
-                  <Card.Title>Description:</Card.Title>
-                  <Card.Body>
-                    <Card.Text>
-                      {data.description
-                        ? data.description
-                        : "You should leave meaningful descriptions for your projects!"}
-                    </Card.Text>
-                  </Card.Body>
-                </CustCard>
+                <DescriptionCard data={data} />
               </Col>
             </Row>
           </Col>
           <Col md={6}>
             <Row>
               <Col xs={12}>
-                <CustCard>
-                  <Card.Title>Current Issues:</Card.Title>
-                  <Card.Body className="">
-                    {data.issues && openIssues.length === 0 && (
-                      <div className="d-flex justify-content-center">
-                        <NoIssues>No open issues! Woo!</NoIssues>
-                      </div>
-                    )}
-                    {data.issues && (
-                      <>
-                        {openIssues.map((i) => (
-                          <Row className="mb-3">
-                            <Col className="w-100" xs={12}>
-                              <IssueCard
-                                projectId={id}
-                                setProjectData={setProjectData}
-                                issue={i}
-                              />
-                            </Col>
-                          </Row>
-                        ))}
-                      </>
-                    )}
-                  </Card.Body>
-                </CustCard>
+                <CurrentIssuesCard
+                  data={data}
+                  projectId={id}
+                  setProjectData={setProjectData}
+                  openIssues={openIssues}
+                />
               </Col>
             </Row>
           </Col>

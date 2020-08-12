@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import styled from 'styled-components';
-import { CustCard } from '../../utils/elements.js'
-import IssueDetailModal from '../IssueDetails/IssueDetails'
+import { Card, Button} from "react-bootstrap";
+import { CustCard } from '../../../../utils/elements.js'
+import IssueDetailModal from '../../../IssueDetails/IssueDetails'
 
 const IssueCard = ({ issue, setProjectData, projectId }) => {
   const [show, setShow] = useState(false);
