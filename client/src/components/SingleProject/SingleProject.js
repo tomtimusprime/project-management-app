@@ -7,6 +7,10 @@ import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import { CustCard } from "./utils/elements.js";
 import styled from "styled-components";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
+import {withAuthenticationRequired} from '@auth0/auth0-react';
+import Loading from '../Loading/Loading'
+
+
 const SingleProject = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -161,17 +165,5 @@ const SingleProject = () => {
 
 export default SingleProject;
 
-{
-  /* <Row>
-<Col md={12}>
-  
-    </Col>
-    <Col md={6}>
 
-      
-    </Col>
-  </Row>
-</Col>
 
-</Row> */
-}
