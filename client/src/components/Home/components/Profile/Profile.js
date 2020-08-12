@@ -9,8 +9,7 @@ import styled from "styled-components";
 import GuestImg from "../../../../assets/images/guest-avatar.jpg";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Modal from "../../../Modal/Modal.js";
-import Loading from '../../../Loading/Loading';
-
+import Loading from "../../../Loading/Loading";
 
 const ProfileImg = styled.img`
   height: 100px;
@@ -29,7 +28,6 @@ const CustomJumbotron = styled.div`
 
 const Profile = (props) => {
   const { user, isAuthenticated } = useAuth0();
-  const [userData, setUserData] = useState(null);
   const [totalIssues, setTotalIssues] = useState(0);
   const [completedIssues, setCompletedIssues] = useState(0);
   const [totalProjects, setTotalProjects] = useState(0);
@@ -52,14 +50,17 @@ const Profile = (props) => {
   };
 
   const fetchUserData = async () => {
-    const { data } = await axios.get(`/api/user`);
-    console.log(data)
-    getTotalIssues(data[0])
-    getTotalCompletedIssues(data[0]);
-    setTotalProjects(data[0].projects.length);
+    try {
+      const { data } = await axios.get(`/api/user`);
+      getTotalIssues(data[0]);
+      getTotalCompletedIssues(data[0]);
+      setTotalProjects(data[0].projects.length);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const getTotalCompletedIssues = user => {
+  const getTotalCompletedIssues = (user) => {
     if (user !== null) {
       const completed = [];
       user.projects.forEach((proj) =>
@@ -69,7 +70,6 @@ const Profile = (props) => {
           }
         })
       );
-      console.log(completed);
       setCompletedIssues(completed.length);
     }
   };
@@ -78,7 +78,7 @@ const Profile = (props) => {
     if (isAuthenticated) {
       start();
     }
-  },[]);
+  }, []);
 
   return (
     <>
@@ -87,10 +87,15 @@ const Profile = (props) => {
           <Row>
             <Col>
               <h1 className="header">Welcome back!</h1>
-              <h1 className="header">{isAuthenticated ? user.name : 'Guest'}</h1>
+              <h1 className="header">
+                {isAuthenticated ? user.name : "Guest"}
+              </h1>
             </Col>
             <Col>
-              <ProfileCard name={isAuthenticated ? user.name : 'Guest'} email={isAuthenticated ? user.email : ''} />
+              <ProfileCard
+                name={isAuthenticated ? user.name : "Guest"}
+                email={isAuthenticated ? user.email : ""}
+              />
             </Col>
           </Row>
         </Container>
@@ -112,6 +117,5 @@ const Profile = (props) => {
 
 export default withAuthenticationRequired(Profile, {
   onRedirecting: () => <Loading />,
-  returnTo: "/"
+  returnTo: "/",
 });
-
