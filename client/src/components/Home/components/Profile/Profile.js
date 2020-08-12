@@ -33,6 +33,7 @@ const Profile = (props) => {
   const [totalIssues, setTotalIssues] = useState(0);
   const [completedIssues, setCompletedIssues] = useState(0);
   const [totalProjects, setTotalProjects] = useState(0);
+
   let start = async () => {
     await axios.post("/cookie", user);
     await fetchUserData();
@@ -76,16 +77,8 @@ const Profile = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       start();
-      const fetchUserData = async () => {
-        const { data } = await axios.get(`/api/user`);
-        console.log(data);
-        getTotalIssues(data[0]);
-        getTotalCompletedIssues(data[0]);
-        setTotalProjects(data[0].projects.length);
-      };
-      fetchUserData();
     }
-  }, [isAuthenticated]);
+  },[]);
 
   return (
     <>
