@@ -7,8 +7,10 @@ import WorkCard from "./components/Card/WorkCard";
 import HistoryCard from "./components/Card/HistoryCard";
 import styled from "styled-components";
 import GuestImg from "../../../../assets/images/guest-avatar.jpg";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Modal from "../../../Modal/Modal.js";
+import Loading from '../../../Loading/Loading';
+
 
 const ProfileImg = styled.img`
   height: 100px;
@@ -92,10 +94,10 @@ const Profile = (props) => {
           <Row>
             <Col>
               <h1 className="header">Welcome back!</h1>
-              <h1 className="header">{user.name}</h1>
+              <h1 className="header">{isAuthenticated ? user.name : 'Guest'}</h1>
             </Col>
             <Col>
-              <ProfileCard name={user.name} email={user.email} />
+              <ProfileCard name={isAuthenticated ? user.name : 'Guest'} email={isAuthenticated ? user.email : ''} />
             </Col>
           </Row>
         </Container>
@@ -115,18 +117,8 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default withAuthenticationRequired(Profile, {
+  onRedirecting: () => <Loading />,
+  returnTo: "/"
+});
 
-// <Row>
-//           <Col>
-//             <Card />
-//           </Col>
-//           <Col>
-//             <Card />
-//           </Col>
-//           <Col>
-//             <Card />
-//           </Col>
-//         </Row>
-
-// <Jumbotron style={{backgroundColor: "#3A3A3A", borderTopLeftRadius: 0}}></Jumbotron>

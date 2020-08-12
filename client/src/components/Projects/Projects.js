@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ProjectBoard from "./components/ProjectBoard";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 // import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import AddProjectModal from "./components/AddProjectModal/AddProjectModal";
 import axios from "axios";
-
+import Loading from '../Loading/Loading'
 const Projects = () => {
   const { isAuthenticated } = useAuth0();
 
@@ -99,4 +99,7 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default withAuthenticationRequired(Projects, {
+  onRedirecting: () => <Loading />,
+  returnTo: "/projects"
+});
