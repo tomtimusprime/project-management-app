@@ -74,7 +74,7 @@ const Profile = (props) => {
       };
       fetchUserData();
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <>
