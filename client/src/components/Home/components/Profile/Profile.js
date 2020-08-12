@@ -93,10 +93,10 @@ const Profile = (props) => {
       </CustomJumbotron>
       <Container>
         <Row className="py-5">
-          <Col>
+          <Col md={6} className='py-5 py-md-0'>
             <WorkCard projects={totalProjects} issues={totalIssues} />
           </Col>
-          <Col>
+          <Col md={6} className='py-5 py-md-0'>
             <HistoryCard issues={completedIssues} />
           </Col>
         </Row>
