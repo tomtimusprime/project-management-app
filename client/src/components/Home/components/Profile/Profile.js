@@ -33,6 +33,7 @@ const Profile = (props) => {
   const [totalProjects, setTotalProjects] = useState(0);
   let start = async () => {
     await axios.post("/cookie", user);
+    await fetchUserData();
   };
 
   const getTotalIssues = (user) => {
@@ -47,8 +48,16 @@ const Profile = (props) => {
     }
   };
 
-  const getTotalCompletedIssues = (user) => {
-    if (isAuthenticated) {
+  const fetchUserData = async () => {
+    const { data } = await axios.get(`/api/user`);
+    console.log(data)
+    getTotalIssues(data[0])
+    getTotalCompletedIssues(data[0]);
+    setTotalProjects(data[0].projects.length);
+  };
+
+  const getTotalCompletedIssues = user => {
+    if (user !== null) {
       const completed = [];
       user.projects.forEach((proj) =>
         proj.issues.forEach((issue) => {
