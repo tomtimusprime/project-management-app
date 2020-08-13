@@ -6,8 +6,6 @@ const issueSchema = new Schema({
     type: String,
     required: true
   },
-  priority: String,
-  description: String,
   Date: {
     type: Date,
     default: Date.now()
@@ -35,6 +33,10 @@ const projectSchema = new Schema({
   inProgress: {
     type: Boolean,
     default: false
+  },  
+  private: {
+    type: Boolean,
+    default: true
   },
   Date: {
     type: Date,

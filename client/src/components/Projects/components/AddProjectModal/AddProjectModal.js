@@ -8,6 +8,7 @@ const AddProjectModal = ({ show, handleClose, setUserData }) => {
     projectName: "",
     priority: "High",
     description: "",
+    private: true,
   }
 
   const [projectForm, setProjectForm] = useState(initialFormState);
@@ -19,6 +20,14 @@ const AddProjectModal = ({ show, handleClose, setUserData }) => {
       [name]: value,
     });
   };
+
+  const handleCheck = (e) => {
+    const { checked } = e.target;
+    setProjectForm({
+      ...projectForm,
+      private: checked
+    })
+  }
 
   const handleSubmit = async () => {
     console.log(projectForm);
@@ -38,6 +47,7 @@ const AddProjectModal = ({ show, handleClose, setUserData }) => {
             values={projectForm}
             handleSubmit={handleSubmit}
             handleInputChange={handleInputChange}
+            handleCheck={handleCheck}
           />
         </Modal.Body>
         <Modal.Footer>
