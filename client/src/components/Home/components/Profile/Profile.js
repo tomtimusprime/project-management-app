@@ -12,6 +12,7 @@ const Profile = () => {
   const [totalIssues, setTotalIssues] = useState(null);
   const [completedIssues, setCompletedIssues] = useState(null);
   const [totalProjects, setTotalProjects] = useState(null);
+  const [totalCompletedProjects, setCompletedProjects] = useState(null);
 
   const { profile, work, history } = cards;
 
@@ -25,10 +26,33 @@ const Profile = () => {
       let total = 0;
 
       user.projects.forEach((project) => {
-        total += project.issues.length;
+        if (project.removed === false) {
+          project.issues.forEach((issue) => {
+            if (issue.completed !== true) {
+              total += 1;
+            }
+          });
+        }
       });
 
       setTotalIssues(total);
+    }
+  };
+
+  const getOpenProjects = (user) => {
+    if (isAuthenticated) {
+      let total = 0;
+      let totalCompleted = 0;
+      user.projects.forEach((project) => {
+        if (project.completed === false && project.removed === false) {
+          total += 1;
+        }
+        setTotalProjects(total);
+        if (project.completed === true) {
+          totalCompleted += 1;
+        }
+      });
+      setCompletedProjects(totalCompleted);
     }
   };
 
@@ -37,7 +61,7 @@ const Profile = () => {
       const { data } = await axios.get(`/api/user`);
       getTotalIssues(data[0]);
       getTotalCompletedIssues(data[0]);
-      setTotalProjects(data[0].projects.length);
+      getOpenProjects(data[0]);
     } catch (error) {
       console.error(error);
     }
@@ -67,43 +91,37 @@ const Profile = () => {
 
   return (
     <>
-
-    
-          <CustomJumbotron>
-            <Container>
-              <Row>
-                <Col>
-                  <h1 className="header">Welcome back!</h1>
-                  <h1 className="header">
-                    {isAuthenticated ? user.name : "Guest"}
-                  </h1>
-                </Col>
-                <Col>
-                  <Card
-                    text={profile}
-                    fieldOne={user.name}
-                    fieldTwo={user.email}
-                  />
-                </Col>
-              </Row>
-            </Container>
-          </CustomJumbotron>
-          <Container>
-            <Row className="py-5">
-              <Col md={6} className="py-5 py-md-0">
-                <Card
-                  text={work}
-                  fieldOne={totalProjects}
-                  fieldTwo={totalIssues}
-                />
-              </Col>
-              <Col md={6} className="py-5 py-md-0">
-                <Card text={history} fieldOne={completedIssues} />
-              </Col>
-            </Row>
-            <br></br>
-          </Container>
-        </>
+      <CustomJumbotron>
+        <Container>
+          <Row>
+            <Col>
+              <h1 className="header">Welcome back!</h1>
+              <h1 className="header">
+                {isAuthenticated ? user.name : "Guest"}
+              </h1>
+            </Col>
+            <Col>
+              <Card text={profile} fieldOne={user.name} fieldTwo={user.email} />
+            </Col>
+          </Row>
+        </Container>
+      </CustomJumbotron>
+      <Container>
+        <Row className="py-5">
+          <Col md={6} className="py-5 py-md-0">
+            <Card text={work} fieldOne={totalProjects} fieldTwo={totalIssues} />
+          </Col>
+          <Col md={6} className="py-5 py-md-0">
+            <Card
+              text={history}
+              fieldOne={completedIssues}
+              fieldTwo={totalCompletedProjects}
+            />
+          </Col>
+        </Row>
+        <br></br>
+      </Container>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
         color: white;
         text-decoration: none;
 

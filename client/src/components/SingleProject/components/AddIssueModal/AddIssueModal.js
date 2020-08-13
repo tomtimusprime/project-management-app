@@ -3,11 +3,13 @@ import { Modal, Button } from "react-bootstrap";
 import { API } from "../../../../utils/API";
 import Form from "./components/AddIssueForm";
 const AddIssueModal = ({ projectId, show, handleClose, setUserData }) => {
-  const [issueForm, setIssueForm] = useState({
+  const initialFormState = {
     issueName: "",
     priority: "High",
     description: "",
-  });
+  };
+
+  const [issueForm, setIssueForm] = useState(initialFormState);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +24,7 @@ const AddIssueModal = ({ projectId, show, handleClose, setUserData }) => {
     const { data } = await API.addIssue(projectId, issueForm);
     setUserData(data);
     handleClose();
+    setIssueForm(initialFormState)
   };
   return (
     <div>

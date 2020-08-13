@@ -62,5 +62,6 @@ export const API = {
     } catch (error) {
       console.error(error)
     }
-  }
+  },
+
 };
