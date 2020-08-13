@@ -26,6 +26,7 @@ const NavBar = () => {
             <Nav className="mr-auto">
             <Nav.Link  as='li'><StyledLink to='/'>Dashboard</StyledLink></Nav.Link>
             <Nav.Link  as='li'><StyledLink to='/projects'>Projects</StyledLink></Nav.Link>
+            <Nav.Link  as='li'><StyledLink to='/projectList'>Browse</StyledLink></Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

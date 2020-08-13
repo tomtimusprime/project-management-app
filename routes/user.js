@@ -9,6 +9,10 @@ router
     .delete(userController.removeUser)
 
 router
+    .route("/api/allUsers")
+    .get(userController.findAllUsers)
+
+router
     .route("/api/user/projects")
     .post(userController.addProject)
     .put(userController.removeProject);

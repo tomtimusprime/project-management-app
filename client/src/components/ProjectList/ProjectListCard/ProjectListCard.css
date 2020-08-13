@@ -1,0 +1,21 @@
+.pItem{
+    color: white;
+}
+
+.pUp{
+    color: yellow;
+}
+
+.pProg{
+    color: yellowgreen;
+}
+
+.pComp{
+    color: green;
+}
+
+.pBox{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

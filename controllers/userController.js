@@ -28,6 +28,7 @@ module.exports = {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
       if (mongoUser) {
         console.log("Access granted for user with JWT");
+        console.log(mongoUser)
         db.User.find({ email: mongoUser[0].email })
           .then((dbModel) => res.json(dbModel))
           .catch((err) => res.status(422).json(err));
@@ -38,6 +39,20 @@ module.exports = {
     })(req, res, next);
   },
 
+  findAllUsers: function (req, res, next) {
+    passport.authenticate("jwt", async function (err, mongoUser, info) {
+      if (mongoUser) {
+        console.log("Access granted for user with JWT");
+        console.log(mongoUser)
+        db.User.find()
+          .then((dbModel) => res.json(dbModel))
+          .catch((err) => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT");
+        res.json({ loggedIn: false });
+      }
+    })(req, res, next);
+  },
   //Add Project to User
   addProject: function (req, res, next) {
     passport.authenticate("jwt", async function (err, mongoUser, info) {
