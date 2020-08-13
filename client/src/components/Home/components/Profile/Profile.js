@@ -94,13 +94,13 @@ const Profile = () => {
       <CustomJumbotron>
         <Container>
           <Row>
-            <Col>
+            <Col className='py-2 py-sm-0' sm={6}>
               <h1 className="header">Welcome back!</h1>
               <h1 className="header">
                 {isAuthenticated ? user.name : "Guest"}
               </h1>
             </Col>
-            <Col>
+            <Col className='py-2 py-sm-0' sm={6}>
               <Card text={profile} fieldOne={user.name} fieldTwo={user.email} />
             </Col>
           </Row>

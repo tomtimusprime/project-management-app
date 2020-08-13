@@ -54,7 +54,7 @@ const SingleProject = () => {
           <Col xs={12}>
             <Row className="pb-1">
               <Col className="d-flex justify-content-between align-items-center">
-                <h1 className="d-inline">{data.projectName}</h1>
+                <h1 style={{wordBreak: 'break-all'}} className="d-inline">{data.projectName}</h1>
                 <Button className="float-right d-inline"><StyledLink to='/projects'><FontAwesomeIcon className='mr-1' icon={faStepBackward} size='1x' color='white' />Go Back</StyledLink></Button>
               </Col>
             </Row>
@@ -105,16 +105,16 @@ const SingleProject = () => {
           show={show}
           handleClose={handleClose}
         />
-        <Row className="py-5">
+        <Row className="py-md-5">
           <Col md={6}>
-            <Row>
+            <Row className='py-3 py-md-3'>
               <Col md={12}>
                 <DescriptionCard data={data} />
               </Col>
             </Row>
           </Col>
           <Col md={6}>
-            <Row>
+            <Row className='py-3 py-md-3'>
               <Col xs={12}>
                 <CurrentIssuesCard
                   data={data}

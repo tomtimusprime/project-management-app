@@ -3,9 +3,9 @@ import { Navbar, Nav } from "react-bootstrap";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Link} from 'react-router-dom'
+import {NavLink as Link} from 'react-router-dom'
 import styled from 'styled-components'
-
+import Logo from '../../../../assets/images/logo-white.png'
 export const StyledLink = styled(Link)`
         color: white;
         text-decoration: none;
@@ -22,10 +22,10 @@ const NavBar = () => {
     
     return (
         <Navbar fixed style={{backgroundColor: 'var(--blue-main)'}} >
-            <Navbar.Brand style={{color: 'white'}}>Project 3</Navbar.Brand>
+            <Navbar.Brand className='py-0' style={{color: 'white'}}><img height='35px' src={Logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
-            <Nav.Link  as='li'><StyledLink to='/'>Dashboard</StyledLink></Nav.Link>
-            <Nav.Link  as='li'><StyledLink to='/projects'>Projects</StyledLink></Nav.Link>
+            <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/'>Dashboard</StyledLink></Nav.Link>
+            <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projects'>Projects</StyledLink></Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

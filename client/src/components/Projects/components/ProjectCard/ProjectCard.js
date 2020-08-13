@@ -43,7 +43,7 @@ const ProjectCard = ({
         zIndex: 1,
         boxShadow: "6px 6px 5px 0px rgba(0,0,0,0.25)",
       }}
-      transition={{ type: "spring" }}
+      transition={{ type: "spring", damping: 10 }}
     >
     <CustCard className="h-auto p-0 my-2 justify-content-center">
         <Row className="d-flex align-items-center mx-0 justify-content-between w-100">
@@ -51,8 +51,10 @@ const ProjectCard = ({
           onClick={() => {
             window.location='/projects/' + id
           }}>
-            
-            <h6>{name}</h6>
+            <div style={{width: '100px', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
+            <h6 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}} >{name}</h6>
+
+            </div>
             <h6>{date}</h6>
             <h6>{issues}</h6>
           </HoverDiv>
@@ -76,3 +78,5 @@ const ProjectCard = ({
 };
 
 export default ProjectCard;
+
+

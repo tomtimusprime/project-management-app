@@ -83,7 +83,7 @@ const Projects = () => {
         </Row>
         <Row className="pb-5">
           {projectBoards.map((i, ind) => (
-            <Col key={ind} md={4}>
+            <Col key={ind} className='my-3 my-md-0 px-1' md={4}>
               <motion.div
                 animate={{
                   opacity: 1,
