@@ -237,5 +237,20 @@ module.exports = {
         res.json({ loggedIn: false });
       }
     })(req, res, next);
-  },
+  },  
+  findPublicProject: function (req, res, next) {
+    passport.authenticate("jwt", async function (err, mongoUser, info) {
+      if (mongoUser) {
+        console.log("Access granted for user with JWT");
+        console.log(mongoUser)
+        db.User.find(
+          { email:req.params.email})
+          .then((dbModel) => res.json(dbModel))
+          .catch((err) => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT");
+        res.json({ loggedIn: false });
+      }
+    })(req, res, next);
+  }
 };

@@ -6,16 +6,15 @@ import AddIssueModal from "./components/AddIssueModal/AddIssueModal";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
 import DescriptionCard from "./components/DescriptionCard/DescriptionCard";
 import CurrentIssuesCard from "./components/CurrentIssuesCard/CurrentIssuesCard";
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-const SingleProject = () => {
-  const { user } = useAuth0();
-  const { id } = useParams();
+const PublicProject = () => {
+  const { id,email } = useParams();
   const [data, setData] = useState({});
   const [show, setShow] = useState(false);
   const [openIssues, setOpenIssues] = useState([]);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
-  console.log(user)
+  console.log(email)
+
 
   const handleClose = () => {
     setShow(false);
@@ -36,7 +35,10 @@ const SingleProject = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("/api/user");
+          console.log(email);
+          console.log(id);
+        const { data } = await axios.get("/api/public/project/"+email+"/"+id);
+        console.log(data);
         setProjectData(data);
       } catch (error) {
         console.error(error);
@@ -63,44 +65,8 @@ const SingleProject = () => {
                 <p>Created on: {date}</p>
               </Col>
             </Row>
-            <Row className="pb-1">
-              <Col xs={"auto"}>
-                <Button
-                  onClick={handleShow}
-                  data-id={data.id}
-                  variant="warning"
-                >
-                  Add Issue
-                </Button>
-              </Col>
-              <Col xs={"auto"}>
-                <Button
-                  onClick={() => {
-                    setDeleteModalShow(true);
-                  }}
-                  data-id={data.id}
-                  variant="danger"
-                >
-                  Delete Project
-                </Button>
-              </Col>
-            </Row>
           </Col>
         </Row>
-        <DeleteModal
-          name={data.projectName}
-          projectId={id}
-          show={deleteModalShow}
-          handleClose={() => {
-            setDeleteModalShow(false);
-          }}
-        />
-        <AddIssueModal
-          setUserData={setProjectData}
-          projectId={id}
-          show={show}
-          handleClose={handleClose}
-        />
         <Row className="py-5">
           <Col md={6}>
             <Row>
@@ -117,7 +83,7 @@ const SingleProject = () => {
                   projectId={id}
                   setProjectData={setProjectData}
                   openIssues={openIssues}
-                  email={user.email}
+                  email={email}
                 />
               </Col>
             </Row>
@@ -128,4 +94,4 @@ const SingleProject = () => {
   );
 };
 
-export default SingleProject;
+export default PublicProject;

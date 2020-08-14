@@ -21,6 +21,10 @@ router
     .route("/api/user/projects/inProgress/:id")
     .post(userController.updateProjectProgress)
 
+router
+    .route("/api/public/project/:email/:id")
+    .get(userController.findPublicProject)
+
 // router
 //     .route("/api/user/projects/completed/:id")
 //     .put(userController.updateProjectCompleted)

@@ -4,7 +4,8 @@ import { CustCard } from "../../utils/elements.js";
 import { NoIssues } from "./utils/elements";
 import IssueCard from "./components/IssueCard/IssueCard";
 import CardAnimation from "../CardAnimation/CardAnimation";
-const CurrentIssuesCard = ({ data, projectId, setProjectData, openIssues }) => {
+const CurrentIssuesCard = ({ data, projectId, setProjectData, openIssues, email }) => {
+  console.log(email)
   return (
     <div>
       <CardAnimation delay={1}>
@@ -22,9 +23,11 @@ const CurrentIssuesCard = ({ data, projectId, setProjectData, openIssues }) => {
                   <Row className="mb-3">
                     <Col className="w-100" xs={12}>
                       <IssueCard
+                        key={projectId}
                         projectId={projectId}
                         setProjectData={setProjectData}
                         issue={i}
+                        email={email}
                       />
                     </Col>
                   </Row>

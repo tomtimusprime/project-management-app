@@ -61,7 +61,8 @@ const ProjectList = () => {
                     name={i.name}
                     description={i.description}
                     status={i.status}
-                    key={i.pName}
+                    id={i.id}
+                    key={i.id}
                 />
             )}
         </>
