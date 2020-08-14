@@ -96,6 +96,17 @@ module.exports = {
               arrayFilters: [
                 { "j._id": mongoose.Types.ObjectId(req.params.id) },
               ],
+            })
+        } else if (req.body.field === "removed") {
+          db.User.update(
+            {
+              email: mongoUser[0].email,
+            },
+            { $set: { "projects.$[j].removed": req.body.status } },
+            {
+              arrayFilters: [
+                { "j._id": mongoose.Types.ObjectId(req.params.id) },
+              ],
             }
           ).then(
             db.User.find({ email: mongoUser[0].email })

@@ -9,6 +9,6 @@ export const cards = {
   },
   history: {
     header: "Lifetime Stats",
-    details: ["Total Issues Closed"],
+    details: ["Total Issues Closed", 'Total Projects Completed'],
   },
 };

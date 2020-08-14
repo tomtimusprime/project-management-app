@@ -4,7 +4,8 @@ import { API } from '../../../../utils/API';
 
 const DeleteModal = ({ show, handleClose, projectId, name }) => {
     const handleDelete = id => {
-         API.deleteProject(id);
+        const { data } = API.setProjectStatus(id, 'removed', true);
+        console.log(data)
         window.location.href = window.location.origin + '/projects'
     }
     return (

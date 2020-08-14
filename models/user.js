@@ -36,6 +36,10 @@ const projectSchema = new Schema({
     type: Boolean,
     default: false
   },
+  removed: {
+    type: Boolean,
+    default: false
+  },
   Date: {
     type: Date,
     default: Date.now()
