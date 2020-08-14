@@ -95,8 +95,8 @@ const Profile = () => {
         <Container>
           <Row>
             <Col className='py-2 py-sm-0' sm={6}>
-              <h1 className="header">Welcome back!</h1>
-              <h1 className="header">
+              <h1 style={{color: 'white'}} className="header">Welcome Back!</h1>
+              <h1 style={{color: 'white'}} className="header">
                 {isAuthenticated ? user.name : "Guest"}
               </h1>
             </Col>
