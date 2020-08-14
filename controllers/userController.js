@@ -86,7 +86,8 @@ module.exports = {
               res.json(data);
             })
             .catch((err) => res.status(422).json(err));
-        } else if (req.body.field === "inProgress") {
+        } 
+         if (req.body.field === "inProgress") {
           db.User.update(
             {
               email: mongoUser[0].email,
@@ -96,8 +97,15 @@ module.exports = {
               arrayFilters: [
                 { "j._id": mongoose.Types.ObjectId(req.params.id) },
               ],
-            })
-        } else if (req.body.field === "removed") {
+            }).then(
+              db.User.find({ email: mongoUser[0].email })
+                .then((data) => {
+                  res.json(data);
+                })
+                .catch((err) => res.status(422).json(err))
+            );
+        } 
+         if (req.body.field === "removed") {
           db.User.update(
             {
               email: mongoUser[0].email,

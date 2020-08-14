@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <Navbar
       style={{ backgroundColor: "var(--blue-main)", height: "56px", marginTop: '1rem' }}
+      fixed='bottom'
       
     >
       <Nav />
