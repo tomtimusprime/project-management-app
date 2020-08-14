@@ -29,8 +29,7 @@ const ProjectCard = ({
   };
 
   const handleDelete = async (e) => {
-    const { data } = API.setProjectStatus(id, 'removed', true);
-    console.log(data);
+    const  data  = API.setProjectStatus(id, 'removed', true);
     setUserData(data);
   };
 
