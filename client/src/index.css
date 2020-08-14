@@ -2,14 +2,12 @@
   --blue-main: #0f4c75;
   --dark-blue: #1b262c;
   --light-grey-sec: #909090;
-  --dark-grey-sec: #3283b867;
+  --dark-grey-sec: #1B262C;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+  font-family: 'Kanit', sans-serif;
   background-color: var(--dark-blue);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

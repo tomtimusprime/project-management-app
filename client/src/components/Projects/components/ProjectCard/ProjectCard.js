@@ -1,16 +1,10 @@
 import React from "react";
 import "./ProjectCard.css";
-import styled from "styled-components";
-import { Button, Row, Col } from "react-bootstrap";
+import {  Row  } from "react-bootstrap";
 import { API } from "../../../../utils/API";
-import { Link } from "react-router-dom";
-
-const MoveButton = styled(Button)`
-  width: 5rem;
-  height: 3rem;
-  border-radius: 0;
-  padding: 0.25rem;
-`;
+import { motion } from "framer-motion";
+import { CustCard } from "../../../SingleProject/utils/elements";
+import {MoveButton,HoverDiv} from './utils/elements'
 
 const ProjectCard = ({
   name,
@@ -21,6 +15,7 @@ const ProjectCard = ({
   completed,
   setUserData,
 }) => {
+
   const handleMove = async (e) => {
     const { id } = e.target.dataset;
     if (inProgress) {
@@ -34,42 +29,53 @@ const ProjectCard = ({
   };
 
   const handleDelete = async (e) => {
-    console.log(e.target.dataset.id)
-    const { data } = await API.deleteProject(e.target.dataset.id);
-    console.log(data)
-    setUserData(data)
+    const  data  = API.setProjectStatus(id, 'removed', true);
+    setUserData(data);
   };
+
   const date = new Date(createdAt).toLocaleDateString();
+  
   return (
-    <Row className="d-flex align-items-center py-2">
-      <Col className="px-lg-0 py-lg-1" xl={3}>
-        <Link
-          as="div"
-          style={{ color: "black", textDecoration: "none" }}
-          to={"/projects/" + id}
-        >
-          <h6>{name}</h6>
-        </Link>
-      </Col>
-      <Col className="px-lg-0 py-lg-1" xl={3}>
-        <h6>{date}</h6>
-      </Col>
-      <Col className="px-lg-0 py-lg-1" xl={3}>
-        <h6>{issues}</h6>
-      </Col>
-      <Col className="px-lg-0 py-lg-1" xl={3}>
-        {completed ? (
-          <MoveButton variant="danger" data-id={id} onClick={handleDelete}>
-            Delete
-          </MoveButton>
-        ) : (
-            <MoveButton data-id={id} onClick={handleMove}>
-              Move
-            </MoveButton>
+    <motion.div
+      whileHover={{
+        scale: 1.1,
+        zIndex: 1,
+        boxShadow: "6px 6px 5px 0px rgba(0,0,0,0.25)",
+      }}
+      transition={{ type: "spring", damping: 10 }}
+    >
+    <CustCard className="h-auto p-0 my-2 justify-content-center">
+        <Row className="d-flex align-items-center mx-0 justify-content-between w-100">
+          <HoverDiv
+          onClick={() => {
+            window.location='/projects/' + id
+          }}>
+            <div style={{width: '100px', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
+            <h6 style={{overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}} >{name}</h6>
+
+            </div>
+            <h6>{date}</h6>
+            <h6>{issues}</h6>
+          </HoverDiv>
+          {completed ? (
+            <div style={{ flexShrink: 0 }}>
+              <MoveButton variant="danger" data-id={id} onClick={handleDelete}>
+                Delete
+              </MoveButton>
+            </div>
+          ) : (
+            <div style={{ flexShrink: 0 }}>
+              <MoveButton data-id={id} onClick={handleMove}>
+                Move
+              </MoveButton>
+            </div>
           )}
-      </Col>
-    </Row>
+        </Row>
+      </CustCard>
+    </motion.div>
   );
 };
 
 export default ProjectCard;
+
+

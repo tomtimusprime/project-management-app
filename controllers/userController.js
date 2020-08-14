@@ -101,12 +101,31 @@ module.exports = {
               res.json(data);
             })
             .catch((err) => res.status(422).json(err));
-        } else if (req.body.field === "inProgress") {
+        } 
+         if (req.body.field === "inProgress") {
           db.User.update(
             {
               email: mongoUser[0].email,
             },
             { $set: { "projects.$[j].inProgress": req.body.status } },
+            {
+              arrayFilters: [
+                { "j._id": mongoose.Types.ObjectId(req.params.id) },
+              ],
+            }).then(
+              db.User.find({ email: mongoUser[0].email })
+                .then((data) => {
+                  res.json(data);
+                })
+                .catch((err) => res.status(422).json(err))
+            );
+        } 
+         if (req.body.field === "removed") {
+          db.User.update(
+            {
+              email: mongoUser[0].email,
+            },
+            { $set: { "projects.$[j].removed": req.body.status } },
             {
               arrayFilters: [
                 { "j._id": mongoose.Types.ObjectId(req.params.id) },

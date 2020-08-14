@@ -5,7 +5,7 @@ import ProjectCard from "./ProjectCard/ProjectCard";
 
 
 const CardHeader = styled.div`
-  border-bottom: 1px solid var(--light-grey-sec);
+  border-bottom: 1px solid black;
 `;
 
 const ProjectBoard = ({ projects, setUserData, boardName, bg }) => {
@@ -26,7 +26,7 @@ const ProjectBoard = ({ projects, setUserData, boardName, bg }) => {
         </Row>
         {projects.map((i, ind) => (
           <Row key={ind * -1}>
-            <Col key={ind}>
+            <Col className='px-0' key={ind}>
               <ProjectCard key={i._id} setUserData={setUserData} id={i._id} name={i.projectName} createdAt={i.Date} issues={i.issues.length} inProgress={i.inProgress} completed={i.completed} />
             </Col>
           </Row>

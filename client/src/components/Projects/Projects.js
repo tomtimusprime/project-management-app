@@ -25,16 +25,16 @@ const Projects = () => {
           const res = await axios.get(`/api/user`);
           setUpcomingProjs(
             res.data[0].projects.filter(
-              (i) => i.inProgress === false && i.completed === false
+              (i) => i.inProgress === false && i.completed === false && i.removed === false
             )
           );
           setInProgressProjs(
             res.data[0].projects.filter(
-              (i) => i.inProgress === true && i.completed === false
+              (i) => i.inProgress === true && i.completed === false && i.removed === false
             )
           );
           setCompletedProjs(
-            res.data[0].projects.filter((i) => i.completed === true)
+            res.data[0].projects.filter((i) => i.completed === true && i.removed === false)
           );
         } catch (error) {
           console.error(error);
@@ -83,7 +83,7 @@ const Projects = () => {
         </Row>
         <Row className="pb-5">
           {projectBoards.map((i, ind) => (
-            <Col key={ind} md={4}>
+            <Col key={ind} className='my-3 my-md-0 px-1' md={4}>
               <motion.div
                 animate={{
                   opacity: 1,

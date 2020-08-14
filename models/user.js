@@ -38,6 +38,10 @@ const projectSchema = new Schema({
     type: Boolean,
     default: true
   },
+  removed: {
+    type: Boolean,
+    default: false
+  },
   Date: {
     type: Date,
     default: Date.now()
