@@ -21,7 +21,7 @@ const NavBar = () => {
 
     
     return (
-        <Navbar fixed style={{backgroundColor: 'var(--blue-main)'}} >
+        <Navbar style={{backgroundColor: 'var(--blue-main)'}} >
             <Navbar.Brand className='py-0' style={{color: 'white'}}><img height='35px' src={Logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
             <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/'>Dashboard</StyledLink></Nav.Link>

@@ -107,11 +107,11 @@ const Profile = () => {
         </Container>
       </CustomJumbotron>
       <Container>
-        <Row className="py-5">
-          <Col md={6} className="py-5 py-md-0">
+        <Row className="py-md-5 py-3">
+          <Col md={6} className="py-3 py-md-5">
             <Card text={work} fieldOne={totalProjects} fieldTwo={totalIssues} />
           </Col>
-          <Col md={6} className="py-5 py-md-0">
+          <Col md={6} className="py-3 py-md-5">
             <Card
               text={history}
               fieldOne={completedIssues}
