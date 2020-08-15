@@ -1,4 +1,4 @@
-# Project Vault ![Project Vault Logo](client/src/assets/logo_logo.png)
+# Project Vault
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 
     
