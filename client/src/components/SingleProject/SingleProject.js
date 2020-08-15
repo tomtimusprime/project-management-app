@@ -114,7 +114,7 @@ const SingleProject = () => {
             </Row>
           </Col>
           <Col md={6}>
-            <Row className='py-3 py-md-3'>
+            <Row className='py-3 py-md-3 pb-5 pb-md-0'>
               <Col xs={12}>
                 <CurrentIssuesCard
                   data={data}
