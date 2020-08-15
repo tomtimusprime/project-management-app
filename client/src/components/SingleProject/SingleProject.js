@@ -7,8 +7,12 @@ import DeleteModal from "./components/DeleteModal/DeleteModal";
 import DescriptionCard from "./components/DescriptionCard/DescriptionCard";
 import { StyledLink } from "../Layout/components/NavBar/NavBar";
 import CurrentIssuesCard from "./components/CurrentIssuesCard/CurrentIssuesCard";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faStepBackward, faExclamationTriangle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStepBackward,
+  faExclamationTriangle,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
 const SingleProject = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
@@ -54,13 +58,25 @@ const SingleProject = () => {
           <Col xs={12}>
             <Row className="pb-1">
               <Col className="d-flex justify-content-between align-items-center">
-                <h1 style={{wordBreak: 'break-all'}} className="d-inline">{data.projectName}</h1>
-                <Button className="float-right d-inline"><StyledLink to='/projects'><FontAwesomeIcon className='mr-1' icon={faStepBackward} size='1x' color='white' />Go Back</StyledLink></Button>
+                <h1 style={{ wordBreak: "break-all" }} className="d-inline">
+                  {data.projectName}
+                </h1>
+                <Button className="float-right d-inline">
+                  <StyledLink to="/projects">
+                    <FontAwesomeIcon
+                      className="mr-1"
+                      icon={faStepBackward}
+                      size="1x"
+                      color="white"
+                    />
+                    Go Back
+                  </StyledLink>
+                </Button>
               </Col>
             </Row>
-            <Row className="pb-1">
+            <Row className="py-2 pb-md-2">
               <Col xs={12}>
-                <p>Created on: {date}</p>
+                <p className="d-inline"> Created on: {date}</p>
               </Col>
             </Row>
             <Row className="pb-1">
@@ -70,8 +86,12 @@ const SingleProject = () => {
                   data-id={data.id}
                   variant="warning"
                 >
-                  <FontAwesomeIcon icon={faExclamationTriangle} 
-                  className='mr-1' size='1x' color='black' />
+                  <FontAwesomeIcon
+                    icon={faExclamationTriangle}
+                    className="mr-1"
+                    size="1x"
+                    color="black"
+                  />
                   Add Issue
                 </Button>
               </Col>
@@ -83,9 +103,33 @@ const SingleProject = () => {
                   data-id={data.id}
                   variant="danger"
                 >
-                   <FontAwesomeIcon icon={faTimesCircle} 
-                  className='mr-1' size='1x' color='white' />
+                  <FontAwesomeIcon
+                    icon={faTimesCircle}
+                    className="mr-1"
+                    size="1x"
+                    color="white"
+                  />
                   Delete Project
+                </Button>
+              </Col>
+              <Col xs="auto">
+                <Button
+                disabled
+                  variant={
+                    data.priority === "High"
+                      ? "danger"
+                      : (data.priority = "Medium"
+                          ? "warning"
+                          : (data.priority = "Low" ? "primary" : "primary"))
+                  }
+                >
+                  {data.priority === "High"
+                    ? "High Priority"
+                    : (data.priority = "Medium"
+                        ? "Medium Priority"
+                        : (data.priority = "Low"
+                            ? "Low Priority"
+                            : "High Priority"))}
                 </Button>
               </Col>
             </Row>
@@ -107,14 +151,14 @@ const SingleProject = () => {
         />
         <Row className="py-md-5">
           <Col md={6}>
-            <Row className='py-3 py-md-3'>
+            <Row className="py-3 py-md-3">
               <Col md={12}>
                 <DescriptionCard data={data} />
               </Col>
             </Row>
           </Col>
           <Col md={6}>
-            <Row className='py-3 py-md-3 pb-5 pb-md-0'>
+            <Row className="py-3 py-md-3 pb-5 pb-md-0">
               <Col xs={12}>
                 <CurrentIssuesCard
                   data={data}
