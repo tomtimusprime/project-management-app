@@ -5,6 +5,10 @@
   --dark-grey-sec: #1B262C;
 }
 
+#root {
+  height: calc(100vh - 56px)
+}
+
 body {
   margin: 0;
   font-family: 'Kanit', sans-serif;

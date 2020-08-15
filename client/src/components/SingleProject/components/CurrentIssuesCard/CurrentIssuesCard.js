@@ -18,9 +18,9 @@ const CurrentIssuesCard = ({ data, projectId, setProjectData, openIssues }) => {
             )}
             {data.issues && (
               <>
-                {openIssues.map((i) => (
-                  <Row className="mb-3">
-                    <Col className="w-100" xs={12}>
+                {openIssues.map((i, ind) => (
+                  <Row key={ind} className="mb-3">
+                    <Col key={ind * -1} className="w-100 p-0 p-md-2" xs={12}>
                       <IssueCard
                         projectId={projectId}
                         setProjectData={setProjectData}
