@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 # Project Vault<img width=100% src="https://i.imgur.com/suXIYDF.png"/>
+=======
+<img width=100% src="https://i.imgur.com/suXIYDF.png"/>
+
+
+>>>>>>> fac3ec6a16c124c926ec148ed854caff528eb02d
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 
     
@@ -44,9 +50,8 @@ npm install
 ```
 
 ## Deployed Version
-```
 https://project-management-app-1.herokuapp.com/
-```
+
 
 ## Contribution and Contributors
 No contribution is too small and all contributions are valued. If you have
