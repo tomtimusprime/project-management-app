@@ -1,4 +1,4 @@
-# Project Vault <img width=100% src="https://i.imgur.com/suXIYDF.png"/>
+# Project Vault<img width=100% src="https://i.imgur.com/suXIYDF.png"/>
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 
     

@@ -8,7 +8,7 @@ const AddIssueForm = ({handleInputChange, handleSubmit, values}) => {
         <Form.Control onChange={handleInputChange}
           name="issueName"
           type="text"
-          placeholder="Error: 404 on Home Page"
+          placeholder="Title"
           value={values.issueName}
         />
       </Form.Group>
