@@ -51,6 +51,6 @@ https://project-management-app-1.herokuapp.com/
 ## Contribution and Contributors
 No contribution is too small and all contributions are valued. If you have
 ways that we can improve this application please reach out directly at the email 
-listed in this github profile page. 
+listed in this github profile. 
 
 
