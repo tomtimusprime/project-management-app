@@ -3,16 +3,19 @@
     
 ## Table of Contents: 
 1. Project description
-2. User Story
-3. Project usage
-4. Licensing
+2. Licensing
+3. User Story
+4. Project usage
 5. Authors
 6. Installation
 7. Deployed Version
-7. Contributors and How to Contribute
+8. Contributors and How to Contribute
 
 ## Description
 A practical and super easy to use project management application. Included in this project is secure login authentication through Auth0, a Kanban style board to stage projects and an area to track project issues. This application is especially geared towards project managers and developers to keep track of project progress and bugs or issues along the way.
+
+## Licensing
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 ## User Story
 ```
@@ -28,12 +31,6 @@ To execute the program use the following command in the root directory:
 ```
 npm run start
 ```
-
-
-## Licensing
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-
-
 ## Authors
 Jon Hansen,
 Schwyn Francis,
