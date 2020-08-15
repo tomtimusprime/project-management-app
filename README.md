@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-# Project Vault<img width=100% src="https://i.imgur.com/suXIYDF.png"/>
-=======
 <img width=100% src="https://i.imgur.com/suXIYDF.png"/>
 
-
->>>>>>> fac3ec6a16c124c926ec148ed854caff528eb02d
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 
     
