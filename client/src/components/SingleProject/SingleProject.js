@@ -8,6 +8,8 @@ import DescriptionCard from "./components/DescriptionCard/DescriptionCard";
 import { StyledLink } from "../Layout/components/NavBar/NavBar";
 import CurrentIssuesCard from "./components/CurrentIssuesCard/CurrentIssuesCard";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import CommentForm from './components/CommentForm/CommentForm';
+import CommentCard from './components/CommentCard/CommentCard';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faStepBackward, faExclamationTriangle, faTimesCircle} from '@fortawesome/free-solid-svg-icons'
@@ -18,6 +20,8 @@ const SingleProject = () => {
   const [show, setShow] = useState(false);
   const [openIssues, setOpenIssues] = useState([]);
   const [deleteModalShow, setDeleteModalShow] = useState(false);
+  const [comments, setComments]=useState([]);
+
   console.log(user)
 
   const handleClose = () => {
@@ -33,6 +37,8 @@ const SingleProject = () => {
       setData(project[0]);
       const openIssues = project[0].issues.filter((i) => i.completed === false);
       setOpenIssues(openIssues);
+      const comment = project[0].comments;
+      setComments(comment)
     }
   };
 
@@ -48,6 +54,19 @@ const SingleProject = () => {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("/api/user");
+        setProjectData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line
+  }, [comments]);
 
   const date = new Date(data.Date).toLocaleDateString();
 
@@ -131,6 +150,16 @@ const SingleProject = () => {
             </Row>
           </Col>
         </Row>
+        <CommentForm
+          project={data}
+          userEmail={user.email}
+          projectOwner={user.email} />
+        {comments.map((i) =>
+          <CommentCard
+            comment={i}
+            key={i._id}
+          />
+        )}
       </Container>
     </>
   );

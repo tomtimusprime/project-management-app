@@ -13,16 +13,22 @@ const issueSchema = new Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  priority: String,
+  description: String
+})
+
+const commentSchema = new Schema({
+  userEmail:{
+    type: String,
+    required: true
+  },
+  comment:{
+    type: String,
+    required: true
   }
 })
 
-// const contributorSchema = new Schema({
-//   name: {
-//     type: String, 
-//     required: true
-//   },
-//   link: String
-// })
 
 const projectSchema = new Schema({
   projectName: String,
@@ -48,8 +54,7 @@ const projectSchema = new Schema({
   },
   description: String,
   issues: [issueSchema],
-  priority: String,
-
+  comments: [commentSchema]
 })
 
 const userSchema = new Schema({

@@ -25,14 +25,13 @@ router
     .route("/api/public/project/:email/:id")
     .get(userController.findPublicProject)
 
-// router
-//     .route("/api/user/projects/completed/:id")
-//     .put(userController.updateProjectCompleted)
-
 router
     .route("/api/user/issues/:projectId")
     .post(userController.addIssue)
     .put(userController.updateIssue)
 
+router
+    .route("/api/project/comment")
+    .post(userController.addComment)
 
 module.exports = router; 

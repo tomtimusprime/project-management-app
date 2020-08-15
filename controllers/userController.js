@@ -271,5 +271,34 @@ module.exports = {
         res.json({ loggedIn: false });
       }
     })(req, res, next);
+  },
+  addComment: async (req, res, next) => {
+    passport.authenticate("jwt", async function (err, mongoUser, info) {
+      console.log(mongoUser);
+      if (mongoUser) {
+        console.log("Access granted for user with JWT");
+        db.User.update(
+          {
+            email: req.body.email,
+          },
+          { $push: { "projects.$[j].comments" : req.body} },
+          {
+            arrayFilters: [
+              { "j._id": mongoose.Types.ObjectId(req.body.projectId) },
+            ],
+          }
+        )
+          .then((data) => {
+            db.User.find({ email: mongoUser[0].email })
+              .then((data) => {
+                res.json(data);
+              });
+          })
+          .catch((err) => res.status(422).json(err));
+      } else {
+        console.log("Access denied for user with JWT");
+        res.json({ loggedIn: false });
+      }
+    })(req, res, next);
   }
 };

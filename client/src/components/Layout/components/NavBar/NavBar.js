@@ -24,14 +24,9 @@ const NavBar = () => {
         <Navbar fixed style={{backgroundColor: 'var(--blue-main)'}} >
             <Navbar.Brand className='py-0' style={{color: 'white'}}><img height='35px' src={Logo}></img></Navbar.Brand>
             <Nav className="mr-auto">
-<<<<<<< HEAD
-            <Nav.Link  as='li'><StyledLink to='/'>Dashboard</StyledLink></Nav.Link>
-            <Nav.Link  as='li'><StyledLink to='/projects'>Projects</StyledLink></Nav.Link>
-            <Nav.Link  as='li'><StyledLink to='/projectList'>Browse</StyledLink></Nav.Link>
-=======
             <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/'>Dashboard</StyledLink></Nav.Link>
             <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projects'>Projects</StyledLink></Nav.Link>
->>>>>>> master
+            <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projectList'>Projects</StyledLink></Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>
