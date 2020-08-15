@@ -1,5 +1,6 @@
-# Project Vault
+# Project Vault ![Project Vault Logo](client/src/assets/logo_logo.png)
 [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
+
     
 ## Table of Contents: 
 1. Project description
@@ -38,7 +39,9 @@ Joe Favorito,
 Tom Black
 
 ## Installation
+```
 npm install
+```
 
 ## Deployed Version
 ```
