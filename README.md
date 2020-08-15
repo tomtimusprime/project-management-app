@@ -46,9 +46,8 @@ npm install
 ```
 
 ## Deployed Version
-```
 https://project-management-app-1.herokuapp.com/
-```
+
 
 ## Contribution and Contributors
 No contribution is too small and all contributions are valued. If you have
