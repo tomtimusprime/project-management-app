@@ -59,8 +59,8 @@ const ProjectCard = ({
           </HoverDiv>
           {completed ? (
             <div style={{ flexShrink: 0 }}>
-              <MoveButton variant="danger" data-id={id} onClick={handleDelete}>
-                Delete
+              <MoveButton variant="success" data-id={id} onClick={handleDelete}>
+                Complete
               </MoveButton>
             </div>
           ) : (

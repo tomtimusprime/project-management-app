@@ -112,26 +112,30 @@ const SingleProject = () => {
                   Delete Project
                 </Button>
               </Col>
-              <Col xs="auto">
-                <Button
-                disabled
-                  variant={
-                    data.priority === "High"
-                      ? "danger"
-                      : (data.priority = "Medium"
-                          ? "warning"
-                          : (data.priority = "Low" ? "primary" : "primary"))
-                  }
-                >
-                  {data.priority === "High"
-                    ? "High Priority"
-                    : (data.priority = "Medium"
-                        ? "Medium Priority"
-                        : (data.priority = "Low"
-                            ? "Low Priority"
-                            : "High Priority"))}
-                </Button>
-              </Col>
+              {data.priority && (
+                <Col xs="auto">
+                  <Button
+                    disabled
+                    variant={
+                      data.priority === "High"
+                        ? "danger"
+                        : data.priority === "Medium"
+                        ? "warning"
+                        : data.priority === "Low"
+                        ? "primary"
+                        : "danger"
+                    }
+                  >
+                    {data.priority === "High"
+                      ? "High Priority"
+                      : data.priority === "Medium"
+                      ? "Medium Priority"
+                      : data.priority === "Low"
+                      ? "Low Priority"
+                      : "High Priority"}
+                  </Button>
+                </Col>
+              )}
             </Row>
           </Col>
         </Row>

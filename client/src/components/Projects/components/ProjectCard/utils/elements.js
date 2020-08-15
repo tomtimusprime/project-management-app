@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Button } from "react-bootstrap";
 
 export const MoveButton = styled(Button)`
-  width: 5rem;
+  width: 6rem;
   height: 3rem;
   border-radius: 0;
   padding: 0.25rem;
