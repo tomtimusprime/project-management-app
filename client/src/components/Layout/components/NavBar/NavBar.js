@@ -26,7 +26,7 @@ const NavBar = () => {
             <Nav className="mr-auto">
             <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/'>Dashboard</StyledLink></Nav.Link>
             <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projects'>Projects</StyledLink></Nav.Link>
-            <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projectList'>Projects</StyledLink></Nav.Link>
+            <Nav.Link  as='li'><StyledLink exact activeStyle={{color: '#ccc', fontWeight: 'bold'}} to='/projectList'>Browse</StyledLink></Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

@@ -21,6 +21,7 @@ const CommentForm = ({project, userEmail,projectOwner}) => {
           console.log(params)
           const data = await axios.post('/api/project/comment',params)
           console.log(data);
+          window.location.reload(false);
       }
 
   return ( 
