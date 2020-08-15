@@ -103,7 +103,7 @@ module.exports = {
                   res.json(data);
                 })
                 .catch((err) => res.status(422).json(err))
-            );
+                );
         } 
          if (req.body.field === "removed") {
           db.User.update(
