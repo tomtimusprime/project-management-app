@@ -113,7 +113,7 @@ const SingleProject = () => {
                 </Button>
               </Col>
               {data.priority && (
-                <Col xs="auto">
+                <Col className='mt-3 my-md-0' xs="auto">
                   <Button
                     disabled
                     variant={
