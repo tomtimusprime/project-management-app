@@ -154,12 +154,14 @@ const SingleProject = () => {
           project={data}
           userEmail={user.email}
           projectOwner={user.email} />
+      <div className="commentBox">
         {comments.map((i) =>
           <CommentCard
             comment={i}
             key={i._id}
           />
         )}
+        </div>
       </Container>
     </>
   );

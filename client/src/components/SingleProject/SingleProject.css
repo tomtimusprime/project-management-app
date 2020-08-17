@@ -4,4 +4,8 @@
 
 .commentBox{
     color: white;
+    background-color: #3283b867;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    box-shadow: 3px 3px 12px -5px rgba(0, 0, 0, 0.35);
 }

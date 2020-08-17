@@ -4,7 +4,7 @@ import { Row, Col, Container, Button, Form } from "react-bootstrap";
 const CommentForm = ({ comment }) => {
     return (
         <Row>
-            <Col xs={12} className="commentBox">
+            <Col xs={12}>
                 <Col xs={2}></Col>
                 <Col xs={2}>{comment.userEmail+": "}</Col>
                 <Col xs={6}>{comment.comment}</Col>
