@@ -53,6 +53,7 @@ const projectSchema = new Schema({
     default: Date.now()
   },
   description: String,
+  priority: String,
   issues: [issueSchema],
   comments: [commentSchema]
 })

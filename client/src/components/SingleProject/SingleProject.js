@@ -55,19 +55,6 @@ const SingleProject = () => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/api/user");
-        setProjectData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-    // eslint-disable-next-line
-  }, [comments]);
-
   const date = new Date(data.Date).toLocaleDateString();
 
   return (
@@ -151,6 +138,7 @@ const SingleProject = () => {
           </Col>
         </Row>
         <CommentForm
+          setProjectData={setProjectData}
           project={data}
           userEmail={user.email}
           projectOwner={user.email} />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Row, Col, Container, Button, Form } from "react-bootstrap";
 
-const CommentForm = ({project, userEmail,projectOwner}) => {
+const CommentForm = ({project, userEmail,projectOwner,setProjectData}) => {
     const [commentForm,setComment] = useState();
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -13,7 +13,11 @@ const CommentForm = ({project, userEmail,projectOwner}) => {
       };
     
       const handleSubmit = async (e) => {
-        submitComment()
+        try {
+          submitComment()
+        } catch (error) {
+          console.error(error);
+        }
       };
     
       const submitComment = async (i) => {
@@ -21,7 +25,23 @@ const CommentForm = ({project, userEmail,projectOwner}) => {
           console.log(params)
           const data = await axios.post('/api/project/comment',params)
           console.log(data);
-          // window.location.reload(false);
+          await refreshComments();
+      }
+
+      const refreshComments = async () =>{
+        try {
+          if(userEmail===projectOwner){
+            const { data } = await axios.get("/api/user");
+            setProjectData(data);
+          } else{
+            const { data } = await axios.get("/api/public/project/" + projectOwner + "/" + project._id);
+            setProjectData(data);
+          }
+          
+        } catch (error) {
+          console.error(error);
+        }
+
       }
 
   return ( 

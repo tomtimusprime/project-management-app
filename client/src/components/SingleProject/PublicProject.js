@@ -49,10 +49,7 @@ const PublicProject = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(email);
-        console.log(id);
         const { data } = await axios.get("/api/public/project/" + email + "/" + id);
-        console.log(data);
         setProjectData(data);
       } catch (error) {
         console.error(error);
@@ -61,19 +58,6 @@ const PublicProject = () => {
     fetchData();
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/api/public/project/" + email + "/" + id);
-        setProjectData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-    // eslint-disable-next-line
-  }, [comments]);
 
   console.log(data)
   const date = new Date(data.Date).toLocaleDateString();
@@ -118,6 +102,7 @@ const PublicProject = () => {
           </Col>
         </Row>
         <CommentForm
+          setProjectData={setProjectData}
           project={data}
           userEmail={user.email}
           projectOwner={email} />
