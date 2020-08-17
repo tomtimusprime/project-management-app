@@ -155,6 +155,7 @@ const SingleProject = () => {
           userEmail={user.email}
           projectOwner={user.email} />
       <div className="commentBox">
+      <h4>Comments:</h4>
         {comments.map((i) =>
           <CommentCard
             comment={i}

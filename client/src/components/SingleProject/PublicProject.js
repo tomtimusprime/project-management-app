@@ -122,6 +122,7 @@ const PublicProject = () => {
           userEmail={user.email}
           projectOwner={email} />
       <div className="commentBox">
+        <h4>Comments:</h4>
         {comments.map((i) =>
           <CommentCard
             comment={i}
