@@ -62,18 +62,19 @@ const PublicProject = () => {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data } = await axios.get("/api/public/project/" + email + "/" + id);
-  //       setProjectData(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchData();
-  //   // eslint-disable-next-line
-  // }, [comments]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("/api/public/project/" + email + "/" + id);
+        setProjectData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+    // eslint-disable-next-line
+  }, [comments]);
+
   console.log(data)
   const date = new Date(data.Date).toLocaleDateString();
 
